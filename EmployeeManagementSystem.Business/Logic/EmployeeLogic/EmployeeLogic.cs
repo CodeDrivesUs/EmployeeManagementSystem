@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Business.SharedModels;
 using EmployeeManagementSystem.Repository.DataModels;
+using EmployeeManagementSystem.Business.Logic.DepartmentLogic;
+using EmployeeManagementSystem.Business.Logic.DevisionLogic;
 using EmployeeManagementSystem.Business.AutoMapper;
 
 namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
@@ -13,8 +15,12 @@ namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
     public class EmployeeLogic :IEmployeeLogic
     {
         private readonly EmployeeManagementDbContext _employeeManagementDbContext;
+        private readonly IDepartmentLogic _departmentLogic;
+        private readonly IDevisionLogic _devisionLogic;
         public EmployeeLogic()
         {
+            _departmentLogic = new DepartmentLogic.DepartmentLogic();
+            _devisionLogic = new DevisionLogic.DevisionLogic();
             _employeeManagementDbContext = new EmployeeManagementDbContext();
         }
         public void CreateEmployee(EmployeeModel model)
@@ -25,7 +31,13 @@ namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
         public List<EmployeeModel> GetAllEmployees()
         {
             var model = _employeeManagementDbContext.employees.ToList();
-            return ObjectMapper.Mapper.Map<List<EmployeeModel>>(model);
+            var list = ObjectMapper.Mapper.Map<List<EmployeeModel>>(model);
+            foreach(var item in list)
+            {
+                item.Devision = _devisionLogic.GetDevisionsById(item.DevisionId).DevisionName;
+                item.Department = _departmentLogic.GetDepartmentById(item.DepartmentId).DepartmentName;
+            }
+            return list;
         }
         public void DeleteEmployees(EmployeeModel model)
         {
