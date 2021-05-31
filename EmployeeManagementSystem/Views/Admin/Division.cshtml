@@ -1,0 +1,99 @@
+﻿@model EmployeeManagementSystem.Business.SharedModels.DevisionModel
+
+@{
+    ViewBag.Title = "Division";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Division Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content p-0">
+                    <form method="post">
+                        <div class="panel-content">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">Department</label>
+                                    <select class="form-control" name="DepartmentId">
+                                        @foreach ( var item in Model._allDepartments)
+                                        {
+                                            <option value="@item.Id">@item.DepartmentName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="Division">Division</label>
+                                    <input type="text" class="form-control" name="DevisionName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                            <input type="submit" value="submit" class="btn btn-default ml-auto" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div id="panel-4" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Division <span class="fw-300"><i>Records</i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+
+                    <HeaderTemplate>
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>Department</th>
+                                    <th>Division</th>
+                                    <th>Division</th>                                  
+                                </tr>
+                            </thead>
+                            <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        @foreach (var item in Model._devisions)
+                        {
+                        <tr>
+                            <td>
+                                <a class="btn btn-danger btn-sm" href="/Admin/DeleteDivision?id=@item.Id">
+                                    
+                                    <i class="fal fa-trash"></i>Delete
+                                </a>
+                            </td>
+                            <td>@item.Id</td>
+                            <td>@item.DepartmentId</td>
+                            <td>@item.DevisionName</td>
+                            <td>@item.DevisionName</td>                            
+                        </tr>
+                        }
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
+                        </table>
+                    </FooterTemplate>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

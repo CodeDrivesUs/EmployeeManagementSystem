@@ -1,0 +1,92 @@
+﻿@model EmployeeManagementSystem.Business.SharedModels.DepartmentModel
+@{
+    ViewBag.Title = "Department";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Department Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content p-0">
+                    <form method="post">
+                        <div class="panel-content">
+
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="DepartmentName">Department</label>
+                                    <input type="text" placeholder="Department" class="form-control" name="DepartmentName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                            <input type="submit" class="btn btn-default ml-auto" value="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div id="panel-4" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Department Records
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+                    
+                        <HeaderTemplate>
+                            <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                                <thead class="bg-warning-200">
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>#</th>
+                                        <th>Department</th>
+                                        <th>Department</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                            @foreach (var item in Model._allDepartments)
+                            {
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-danger btn-sm" href="/Admin/DeleteDepartment?id=@item.Id">
+
+                                            <i class="fal fa-trash"></i>Delete
+                                        </a>
+                                    </td>
+                                    <td>@item.Id</td>
+                                    <td>@item.DepartmentName</td>
+                                    <td>@item.DepartmentName</td>
+                               
+                                   
+                                </tr>
+                            }
+                        </ItemTemplate>
+                        <FooterTemplate>
+                            </tbody>
+                            </table>
+                        </FooterTemplate>
+
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

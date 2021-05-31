@@ -1,0 +1,68 @@
+﻿@using EmployeeManagementSystem.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="flex-1" style="background:url(../../Content/Admin/img/svg/pattern-1.svg) no-repeat center bottom fixed; background-size: cover;">
+    <div class="container py-4 py-lg-5 my-lg-5 px-4 px-sm-0">
+        <div class="row">
+            <div class="col col-md-6 col-lg-7 hidden-sm-down">
+                <h2 class="fs-xxl fw-500 mt-4 text-white">
+                    Employee Management System
+                </h2>
+                <h2 class="fs-xxl fw-500 mt-4 text-white">
+                    Login Page
+                </h2>
+                <div class="d-sm-flex flex-column align-items-center justify-content-center d-md-block">
+                    <div class="px-0 py-1 mt-5 text-white fs-nano opacity-50">
+                        Find us on social media
+                    </div>
+                    <div class="d-flex flex-row opacity-70">
+                        <a href="#" class="mr-2 fs-xxl text-white">
+                            <i class="fab fa-facebook-square"></i>
+                        </a>
+                        <a href="#" class="mr-2 fs-xxl text-white">
+                            <i class="fab fa-twitter-square"></i>
+                        </a>
+                        <a href="#" class="mr-2 fs-xxl text-white">
+                            <i class="fab fa-google-plus-square"></i>
+                        </a>
+                        <a href="#" class="mr-2 fs-xxl text-white">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 ml-auto">
+                <h1 class="text-white fw-300 mb-3 d-sm-block d-md-none">
+                    Secure login
+                </h1>
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+            <div class="card p-4 rounded-plus bg-faded">
+                <div class="form-group">
+                    <label class="form-label" for="username">Email</label>
+                    <input type="email" name="Email" class="form-control form-control-lg" placeholder="Enter Your Email" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control form-control-lg" placeholder="Enter Your Password" name="Password" type="password" required />
+                </div>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+                <div class="row no-gutters">
+                    <div class="col-lg-12 pr-lg-1 my-2">
+                      <input type="submit" value="Login" class="btn btn-block btn-lg" />
+                    </div>
+                </div>
+            </div>
+                }
+                </div>
+        </div>
+        <div class="position-absolute pos-bottom pos-left pos-right p-3 text-center text-white">
+            Employee ManageMent System
+        </div>
+    </div>
+</div>
