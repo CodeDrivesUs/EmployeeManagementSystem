@@ -387,7 +387,8 @@ namespace EmployeeManagementSystem.Controllers
 
         //
         // POST: /Account/LogOff
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
