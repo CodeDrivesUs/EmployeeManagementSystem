@@ -56,6 +56,7 @@
     <Compile Include="DataModels\Department.cs" />
     <Compile Include="DataModels\Devision.cs" />
     <Compile Include="DataModels\Employee.cs" />
+    <Compile Include="DataModels\Leave.cs" />
     <Compile Include="DataModels\PrimaryKey.cs" />
     <Compile Include="DbContext\EmployeeManagementDbContext.cs" />
     <Compile Include="Migrations\202105310107222_initia-migration.cs" />
@@ -69,6 +70,10 @@
     <Compile Include="Migrations\202105311647491_zwelifgwrg.cs" />
     <Compile Include="Migrations\202105311647491_zwelifgwrg.designer.cs">
       <DependentUpon>202105311647491_zwelifgwrg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106021204529_dafwdg.cs" />
+    <Compile Include="Migrations\202106021204529_dafwdg.designer.cs">
+      <DependentUpon>202106021204529_dafwdg.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202105311647491_zwelifgwrg.resx">
       <DependentUpon>202105311647491_zwelifgwrg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106021204529_dafwdg.resx">
+      <DependentUpon>202106021204529_dafwdg.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

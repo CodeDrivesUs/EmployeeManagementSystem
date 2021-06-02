@@ -15,6 +15,7 @@ namespace EmployeeManagementSystem.Repository.DbContext
         public DbSet<Employee>  employees { get; set; }
         public DbSet<Devision>  devisions { get; set; }
         public DbSet<Department> departments { get; set; }
+        public DbSet<Leave>  leaves { get; set; }
 
     }
 

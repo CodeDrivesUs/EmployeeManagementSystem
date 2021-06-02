@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ViewLeave";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+@model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.LeaveModel>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="panel-4" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Leave <span class="fw-300"><i>Records</i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+
+                    <HeaderTemplate>
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>LeaveCategory</th>
+                                    <th>StartDate</th>
+                                    <th>EndDate</th>
+                                    <th>Reason</th>
+                                    <th>ApplyOn</th>
+                                    <th>Status</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        @foreach(var  item in Model)
+                        {
+                        <tr>
+                             <td>@item.leaveType</td>
+                             <td>@item.startDate</td>
+                             <td>@item.endDate</td>
+                             <td>@item.reason</td>
+                             <td>@item.appliedon</td>
+                             <td>@item.statusId</td>
+                             <td>@item.statusId</td>
+                        </tr>
+                        }
+                        
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
+                        </table>
+                    </FooterTemplate>
+                    </asp:Repeater>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

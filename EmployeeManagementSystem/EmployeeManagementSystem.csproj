@@ -170,6 +170,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -546,6 +547,11 @@
     <Content Include="Views\Admin\Division.cshtml" />
     <Content Include="Views\Admin\Employee.cshtml" />
     <Content Include="Views\Admin\ViewEmployee.cshtml" />
+    <Content Include="Views\Account\InvalidUser.cshtml" />
+    <Content Include="Views\Shared\_EmployeeLayout.cshtml" />
+    <Content Include="Views\Employee\Dashboard.cshtml" />
+    <Content Include="Views\Employee\ApplyLeave.cshtml" />
+    <Content Include="Views\Employee\ViewLeave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

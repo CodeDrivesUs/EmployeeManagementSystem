@@ -50,5 +50,14 @@ namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
             var model = _employeeManagementDbContext.employees.FirstOrDefault(x => x.Id == Id);
             return ObjectMapper.Mapper.Map<EmployeeModel>(model);
         }
+        public EmployeeModel GetEmployeesByEmail(string email)
+        {
+            var model = _employeeManagementDbContext.employees.FirstOrDefault(x => x.Email == email);
+            return ObjectMapper.Mapper.Map<EmployeeModel>(model);
+        }
+        public int GetEmployeesIdByEmail(string email)
+        {
+            return GetEmployeesByEmail(email).Id;
+        }
     }
 }

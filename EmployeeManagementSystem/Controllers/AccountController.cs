@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EmployeeManagementSystem.Models;
+using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
 
 namespace EmployeeManagementSystem.Controllers
 {
@@ -17,9 +18,11 @@ namespace EmployeeManagementSystem.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private readonly IEmployeeLogic _employeeLogic;
 
         public AccountController()
         {
+            _employeeLogic = new EmployeeLogic();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -151,6 +154,11 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                var employee = _employeeLogic.GetEmployeesByEmail(model.Email);
+                if(employee == null)
+                {
+                    return View("InvalidUser");
+                }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

@@ -18,7 +18,7 @@ namespace EmployeeManagementSystem.Business.AutoMapper
                 cfg.CreateMap<Devision, DevisionModel>().ReverseMap();
                 cfg.CreateMap<Department, DepartmentModel>().ReverseMap();
                 cfg.CreateMap<Employee, EmployeeModel>().ReverseMap();
-
+                cfg.CreateMap<Leave, LeaveModel>().ReverseMap();
             });
             var mapper = config.CreateMapper();
             return mapper;

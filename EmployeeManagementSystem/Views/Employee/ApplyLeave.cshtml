@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "ApplyLeave";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Apply Leave Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content p-0">
+                    <div class="panel-content">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label" for="validationDefault01">Leave Category</label>
+                                    <select name="leaveType"  class="form-control">
+                                        <option>Holidays</option>
+                                        <option>Casual Leave</option>
+                                        <option>Sick Leave</option>
+                                        <option>Maternity Leave</option>
+                                        <option>Quarantine Leave</option>
+                                    </select>                                   
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label" for="validationDefault01">Start Date</label>
+                                 <input type="date" name="startDate" class="form-control" />
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label" for="validationDefault01">End Date</label>
+                                <input type="date" name="endtDate" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label" for="validationDefault01">Reason</label>
+                                <textarea name="reason" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                        <input type="submit" value="submit" class="btn btn-default ml-auto" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

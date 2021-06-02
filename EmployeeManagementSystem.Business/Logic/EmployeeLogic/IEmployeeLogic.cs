@@ -13,5 +13,7 @@ namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
         List<EmployeeModel> GetAllEmployees();
         void DeleteEmployees(EmployeeModel model);
         EmployeeModel GetEmployeesById(int Id);
+        EmployeeModel GetEmployeesByEmail(string email);
+        int GetEmployeesIdByEmail(string email);
     }
 }
