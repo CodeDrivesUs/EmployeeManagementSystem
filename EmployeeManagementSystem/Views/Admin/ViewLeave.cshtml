@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "ViewLeave";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 @model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.LeaveModel>
 @using EmployeeManagementSystem.Business.Enums
@@ -22,6 +22,7 @@
                             <thead class="bg-warning-200">
                                 <tr>
                                     <th>LeaveCategory</th>
+                                    <th>Action</th>
                                     <th>StartDate</th>
                                     <th>EndDate</th>
                                     <th>Reason</th>
@@ -36,13 +37,19 @@
                         @foreach(var  item in Model)
                         {
                         <tr>
-                             <td>@item.leaveType</td>
-                             <td>@item.startDate</td>
-                             <td>@item.endDate</td>
-                             <td>@item.reason</td>
-                             <td>@item.appliedon</td>
-                             <td>@Enum.GetName(typeof(LeavestatusEnum), item.statusId)</td>
-                             <td>@item.statusId</td>
+                            <td>
+                                <a class="btn btn-danger btn-sm" href="/">
+                                    
+                                    <i class="fal fa-list"></i>Action
+                                </a>
+                            </td>
+                            <td>@item.leaveType</td>
+                            <td>@item.startDate</td>
+                            <td>@item.endDate</td>
+                            <td>@item.reason</td>
+                            <td>@item.appliedon</td>
+                            <td>@Enum.GetName(typeof(LeavestatusEnum), item.statusId)</td>
+                            <td>@item.statusId</td>
                         </tr>
                         }
                         

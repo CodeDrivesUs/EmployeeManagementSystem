@@ -10,6 +10,15 @@ namespace EmployeeManagementSystem.Controllers
     {
         public ActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Dashboard","Admin");
+            }
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Dashboard", "Employee");
+
+            }
             return View();
         }
 

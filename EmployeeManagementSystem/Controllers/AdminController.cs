@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using EmployeeManagementSystem.Business.Logic.DepartmentLogic;
 using EmployeeManagementSystem.Business.Logic.DevisionLogic;
 using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
+using EmployeeManagementSystem.Business.Logic.LeaveLogic;
 using EmployeeManagementSystem.Business.SharedModels;
 
 namespace EmployeeManagementSystem.Controllers
@@ -17,8 +18,11 @@ namespace EmployeeManagementSystem.Controllers
         private readonly IDepartmentLogic _departmentLogic;
         private readonly IDevisionLogic _devisionLogic;
         private readonly IEmployeeLogic _employeeLogic;
+        private ILeaveLogic _leaveLogic;
+
         public AdminController()
         {
+            _leaveLogic = new LeaveLogic();
             _employeeLogic = new EmployeeLogic();
             _devisionLogic = new DevisionLogic();
             _departmentLogic = new DepartmentLogic();
@@ -127,6 +131,22 @@ namespace EmployeeManagementSystem.Controllers
             }
             _employeeLogic.DeleteEmployees(employee);
             return RedirectToAction("ViewEmployee");
+        }
+        public ActionResult ViewLeave()
+        {
+            return View(_leaveLogic.GetAllLeaves());
+        }
+        public ActionResult SubmittedLeave()
+        {
+            return View("ViewLeave", _leaveLogic.GetAllSubmittedLeaves());
+        }
+        public ActionResult ApprovedLeave()
+        {
+            return View("ViewLeave", _leaveLogic.GetAllApprovedLeaves());
+        }
+        public ActionResult DeclinedLeave()
+        {
+            return View("ViewLeave", _leaveLogic.GetAllDeclinedLeaves());
         }
     }
 }

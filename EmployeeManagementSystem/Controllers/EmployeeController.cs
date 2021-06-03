@@ -40,7 +40,7 @@ namespace EmployeeManagementSystem.Controllers
                 model.appliedon = DateTime.Now;
                 model.EmployeeId = GetEmployeeId();
                 _leaveLogic.CreateLeave(model);
-                return RedirectToAction("Department");
+                return RedirectToAction("ViewLeave");
             }
             return View(model);
         }

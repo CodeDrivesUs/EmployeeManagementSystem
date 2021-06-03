@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\ObjectMapper.cs" />
+    <Compile Include="Enums\LeavestatusEnum.cs" />
     <Compile Include="Logic\DepartmentLogic\DepartmentLogic.cs" />
     <Compile Include="Logic\DepartmentLogic\IDepartmentLogic.cs" />
     <Compile Include="Logic\DevisionLogic\DevisionLogic.cs" />
