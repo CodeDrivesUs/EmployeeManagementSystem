@@ -8,6 +8,7 @@ using EmployeeManagementSystem.Business.Logic.DepartmentLogic;
 using EmployeeManagementSystem.Business.Logic.DevisionLogic;
 using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
 using EmployeeManagementSystem.Business.Logic.LeaveLogic;
+using EmployeeManagementSystem.Business.Logic.SalaryLogic;
 using EmployeeManagementSystem.Business.SharedModels;
 
 namespace EmployeeManagementSystem.Controllers
@@ -18,10 +19,12 @@ namespace EmployeeManagementSystem.Controllers
         private readonly IDepartmentLogic _departmentLogic;
         private readonly IDevisionLogic _devisionLogic;
         private readonly IEmployeeLogic _employeeLogic;
+        private readonly ISalaryLogic _salaryLogic;
         private ILeaveLogic _leaveLogic;
 
         public AdminController()
         {
+            _salaryLogic = new SalaryLogic();
             _leaveLogic = new LeaveLogic();
             _employeeLogic = new EmployeeLogic();
             _devisionLogic = new DevisionLogic();
@@ -34,8 +37,8 @@ namespace EmployeeManagementSystem.Controllers
         }
         public ActionResult Department()
         {
-            return View(new DepartmentModel {_allDepartments= _departmentLogic.GetAllDepartments() });
-        } 
+            return View(new DepartmentModel { _allDepartments = _departmentLogic.GetAllDepartments() });
+        }
         [HttpPost]
         public ActionResult Department(DepartmentModel model)
         {
@@ -45,7 +48,7 @@ namespace EmployeeManagementSystem.Controllers
                 return RedirectToAction("Department");
             }
             return View(model);
-        }   
+        }
         public ActionResult DeleteDepartment(int? id)
         {
             if (id == null)
@@ -63,7 +66,7 @@ namespace EmployeeManagementSystem.Controllers
         }
         public ActionResult Division()
         {
-            return View(new DevisionModel { _allDepartments= _departmentLogic.GetAllDepartments(), _devisions=_devisionLogic.GetAllDevisions() });
+            return View(new DevisionModel { _allDepartments = _departmentLogic.GetAllDepartments(), _devisions = _devisionLogic.GetAllDevisions() });
         }
         [HttpPost]
         public ActionResult Division(DevisionModel model)
@@ -93,25 +96,22 @@ namespace EmployeeManagementSystem.Controllers
         }
         public ActionResult Employee()
         {
-            return View(new EmployeeModel { _allDepartments=_departmentLogic.GetAllDepartments(), _devisions=_devisionLogic.GetAllDevisions() });
+            return View(new EmployeeModel { _allDepartments = _departmentLogic.GetAllDepartments(), _devisions = _devisionLogic.GetAllDevisions() });
         }
         [HttpPost]
         public ActionResult Employee(EmployeeModel model, HttpPostedFileBase EmplyeeImage)
         {
-            //if (ModelState.IsValid)
-            //{
-                if (EmplyeeImage != null)
-                {
-                    int filelength = EmplyeeImage.ContentLength;
-                    byte[] Myfile = new byte[filelength];
-                    EmplyeeImage.InputStream.Read(Myfile, 0, filelength);
-                    model.EmployeeImage = Myfile;
-                    model.CreatedOn = DateTime.Now;
-                    _employeeLogic.CreateEmployee(model);
-                    return RedirectToAction("ViewEmployee");
-                }
-         //   }
-                return RedirectToAction("Employee");
+            if (EmplyeeImage != null)
+            {
+                int filelength = EmplyeeImage.ContentLength;
+                byte[] Myfile = new byte[filelength];
+                EmplyeeImage.InputStream.Read(Myfile, 0, filelength);
+                model.EmployeeImage = Myfile;
+                model.CreatedOn = DateTime.Now;
+                _employeeLogic.CreateEmployee(model);
+                return RedirectToAction("ViewEmployee");
+            }
+            return RedirectToAction("Employee");
         }
 
         public ActionResult ViewEmployee()
@@ -144,9 +144,43 @@ namespace EmployeeManagementSystem.Controllers
         {
             return View("ViewLeave", _leaveLogic.GetAllApprovedLeaves());
         }
+        public ActionResult ProcessLeave(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var leave = _leaveLogic.GetLeaveById((int)id);
+            if (leave == null)
+            {
+                return HttpNotFound();
+            }
+            return View(leave);
+        }
+        [HttpPost]
+        public ActionResult ProcessLeave(LeaveModel leave)
+        {
+            _leaveLogic.ProcessLeave(leave);
+            return RedirectToAction("SubmittedLeave");
+        }
+
         public ActionResult DeclinedLeave()
         {
             return View("ViewLeave", _leaveLogic.GetAllDeclinedLeaves());
+        }
+        public ActionResult Salary()
+        {
+            return View(new SalaryModel { _devisions= _devisionLogic.GetAllDevisions(), _employees= _employeeLogic.GetAllEmployees() });
+        }
+        [HttpPost]
+        public ActionResult Salary(SalaryModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _salaryLogic.CreateSalary(model);
+                return RedirectToAction("SubmittedLeave");
+            }
+            return View();
         }
     }
 }

@@ -64,12 +64,15 @@
     <Compile Include="Logic\EmployeeLogic\IEmployeeLogic.cs" />
     <Compile Include="Logic\LeaveLogic\ILeaveLogic.cs" />
     <Compile Include="Logic\LeaveLogic\LeaveLogic.cs" />
+    <Compile Include="Logic\SalaryLogic\ISalaryLogic.cs" />
+    <Compile Include="Logic\SalaryLogic\SalaryLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedModels\DepartmentModel.cs" />
     <Compile Include="SharedModels\DevisionModel.cs" />
     <Compile Include="SharedModels\EmployeeModel.cs" />
     <Compile Include="SharedModels\LeaveModel.cs" />
     <Compile Include="SharedModels\PrimaryKey.cs" />
+    <Compile Include="SharedModels\SalaryModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

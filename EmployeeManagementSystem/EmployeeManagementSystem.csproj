@@ -496,6 +496,9 @@
     <Content Include="Content\Admin\webfonts\fa-solid-900d41d.eot" />
     <Content Include="Content\Admin\webfonts\nextgen-icons.eot" />
     <Content Include="Content\Admin\webfonts\nextgen-iconsd41d.eot" />
+    <None Include="Properties\PublishProfiles\Group48 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Group48 - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\Group48 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -553,6 +556,8 @@
     <Content Include="Views\Employee\ApplyLeave.cshtml" />
     <Content Include="Views\Employee\ViewLeave.cshtml" />
     <Content Include="Views\Admin\ViewLeave.cshtml" />
+    <Content Include="Views\Admin\ProcessLeave.cshtml" />
+    <Content Include="Views\Admin\Salary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

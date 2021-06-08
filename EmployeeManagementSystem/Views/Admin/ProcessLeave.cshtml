@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "ProcessLeave";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model EmployeeManagementSystem.Business.SharedModels.LeaveModel
+@using EmployeeManagementSystem.Business.Enums
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Leave Application Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <form method="post">
+                    @Html.HiddenFor(x=>x.Id)
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Employee Id</label>
+                                    <input type="text" name="" value="@Model.EmployeeId" class="form-control" readonly />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Employeee Name</label>
+                                    <input type="text" name="EmployeeName" value="@Model.EmployeeName" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">Leave Category</label>
+                                    <input type="text" name="EmployeeName" value="@Model.leaveType" class="form-control" readonly />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">Start Date</label>
+                                    <input type="text" name="EmployeeName" value="@Model.startDate.ToShortDateString()" class="form-control" readonly />
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">End Date</label>
+                                    <input type="text" name="EmployeeName" value="@Model.endDate.ToShortDateString()" class="form-control" readonly />
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Apply On</label>
+                                    <input type="text" name="EmployeeName" value="@Model.appliedon" class="form-control" readonly />
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">Reason</label>
+                                    <textarea class="form-control" rows="4" readonly>@Model.reason</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label>Status</label>
+                                    <select class="form-control" name="statusId" required>
+                                        @foreach (var item in Enum.GetValues(typeof(LeavestatusEnum)).Cast<LeavestatusEnum>().Where(x => x != LeavestatusEnum.Submitted))
+                                        {
+                                            var value = (int)item;
+                                            <option value="@value">@item.ToString()</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                            <input type="submit" value="Submit" class="btn btn-default ml-auto" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -58,43 +58,14 @@
     <Compile Include="DataModels\Employee.cs" />
     <Compile Include="DataModels\Leave.cs" />
     <Compile Include="DataModels\PrimaryKey.cs" />
+    <Compile Include="DataModels\Salary.cs" />
     <Compile Include="DbContext\EmployeeManagementDbContext.cs" />
-    <Compile Include="Migrations\202105310107222_initia-migration.cs" />
-    <Compile Include="Migrations\202105310107222_initia-migration.designer.cs">
-      <DependentUpon>202105310107222_initia-migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105311631546_zwelifg.cs" />
-    <Compile Include="Migrations\202105311631546_zwelifg.designer.cs">
-      <DependentUpon>202105311631546_zwelifg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202105311647491_zwelifgwrg.cs" />
-    <Compile Include="Migrations\202105311647491_zwelifgwrg.designer.cs">
-      <DependentUpon>202105311647491_zwelifgwrg.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202106021204529_dafwdg.cs" />
-    <Compile Include="Migrations\202106021204529_dafwdg.designer.cs">
-      <DependentUpon>202106021204529_dafwdg.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202105310107222_initia-migration.resx">
-      <DependentUpon>202105310107222_initia-migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105311631546_zwelifg.resx">
-      <DependentUpon>202105311631546_zwelifg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202105311647491_zwelifgwrg.resx">
-      <DependentUpon>202105311647491_zwelifgwrg.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202106021204529_dafwdg.resx">
-      <DependentUpon>202106021204529_dafwdg.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

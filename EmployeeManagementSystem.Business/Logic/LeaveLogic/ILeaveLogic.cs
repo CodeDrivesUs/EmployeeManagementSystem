@@ -15,5 +15,7 @@ namespace EmployeeManagementSystem.Business.Logic.LeaveLogic
         List<LeaveModel> GetAllSubmittedLeaves();
         List<LeaveModel> GetAllApprovedLeaves();
         List<LeaveModel> GetAllDeclinedLeaves();
+        LeaveModel GetLeaveById(int Id);
+        void ProcessLeave(LeaveModel model);
     }
 }

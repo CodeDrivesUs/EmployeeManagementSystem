@@ -8,15 +8,19 @@ using EmployeeManagementSystem.Business.SharedModels;
 using EmployeeManagementSystem.Repository.DataModels;
 using EmployeeManagementSystem.Business.AutoMapper;
 using EmployeeManagementSystem.Business.Enums;
+using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
+using System.Data.Entity;
 
 namespace EmployeeManagementSystem.Business.Logic.LeaveLogic
 {
     public class LeaveLogic:ILeaveLogic
     {
         private readonly EmployeeManagementDbContext _employeeManagementDbContext;
+        private readonly IEmployeeLogic _employee;
       
         public LeaveLogic()
-        {           
+        {
+            _employee = new EmployeeLogic.EmployeeLogic();
             _employeeManagementDbContext = new EmployeeManagementDbContext();
         }
         public void CreateLeave(LeaveModel model)
@@ -49,5 +53,20 @@ namespace EmployeeManagementSystem.Business.Logic.LeaveLogic
         {
             return GetAllLeaves().Where(x => x.EmployeeId == Id).ToList();
         }
+        public LeaveModel GetLeaveById(int Id)
+        {
+            var model = _employeeManagementDbContext.leaves.FirstOrDefault(x => x.Id == Id);
+            var  leave = ObjectMapper.Mapper.Map<LeaveModel>(model);
+            leave.EmployeeName = _employee.GetEmployeesById(leave.EmployeeId).EmployeeName;
+            return leave;
+        }
+        public void ProcessLeave(LeaveModel model)
+        {
+            var leave = _employeeManagementDbContext.leaves.FirstOrDefault(x => x.Id == model.Id);
+            leave.statusId = model.statusId;
+            _employeeManagementDbContext.Entry(leave).State = EntityState.Modified;
+            _employeeManagementDbContext.SaveChanges();
+        }
+       
     }
 }

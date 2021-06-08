@@ -14,6 +14,8 @@ namespace EmployeeManagementSystem.Business.SharedModels
         public DateTime appliedon { get; set; }
         public string reason { get; set; }
         public int EmployeeId { get; set; }
+        public string EmployeeName { get; set; }
         public int statusId { get; set; }
+
     }
 }

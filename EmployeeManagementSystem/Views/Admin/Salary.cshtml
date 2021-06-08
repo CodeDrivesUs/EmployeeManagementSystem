@@ -1,0 +1,161 @@
+﻿
+@{
+    ViewBag.Title = "Salary";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model EmployeeManagementSystem.Business.SharedModels.SalaryModel
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Salary Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <form method="post">
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="validationDefault01">Select Division</label>
+                                    <select class="form-control" name="DevisionId">
+                                        @foreach (var item in Model._devisions)
+                                        {
+                                            <option value="@item.Id">@item.DevisionName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label" for="validationDefault02">Employee</label>
+                                    <select class="form-control" name="DevisionId">
+                                        @foreach (var item in Model._employees)
+                                        {
+                                            <option value="@item.Id">@item.EmployeeName</option>
+                                        }
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+
+                                <div class="col-md-6 mb-3">
+                                    <label>Basic Salary</label>
+                                    <input type="text" id="BasicSalary" name="BasicSalary" placeholder="Basic Salary" class="form-control calculate" />
+                                </div>
+                            </div>
+                            <div class="form-row mb-2">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault03">Houserent Allowance</label>
+                                    <input type="text" id="HouseRent" name="HouseRent" placeholder="Houserent Allowance" class="form-control calculate" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault04">Medical Allowance</label>
+                                    <input type="text" id="MedicalAllowance" name="MedicalAllowance" placeholder="Medical Allowance" class="form-control calculate" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault05">Speical Allowance</label>
+                                    <input type="text" id="SpecialAllowance" name="SpecialAllowance" placeholder="Speical Allowance" class="form-control calculate" />
+                                </div>
+                            </div>
+                            <div class="form-row mb-2">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault03">Fuel Allowance</label>
+                                    <input type="text" id="FuelAllowance" name="FuelAllowance" placeholder="Fuel Allowance" class="form-control calculate" />
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault04">Phone Bill Allowance</label>
+                                    <input type="text" id="PhoneBillAllowance" name="PhoneBillAllowance" placeholder="Phone Bill Allowance" class="form-control calculate" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault05">Other Allowance</label>
+                                    <asp:TextBox ID="txtOtherAllowance" runat="server" CssClass="form-control calculate" placeholder="Other Allowance"></asp:TextBox>
+                                    <input type="text" id="OtherAllowance" name="OtherAllowance" placeholder="Other Allowance" class="form-control calculate" />
+                                </div>
+                            </div>
+                        
+                            <div class="form-row mb-2">
+
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault04">Tax Deduction</label>
+                                    <input type="text" id="TaxDeductions" name="TaxDeductions" placeholder="Other Tax Deduction" class="form-control calculateDeduction" />
+
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault05">Other Deduction</label>
+                                    <input type="text" id="OtherDeductions" name="OtherDeductions" onkeypress="SUM()" placeholder="Other Deduction" class="form-control calculateDeduction" />
+                                </div>
+                            </div>
+                            <div class="form-row mb-2">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault03">Gross Salary</label>
+                                    <input type="text" name="GrossSalary" id="GrossSalary" class="form-control" placeholder="Gross Salary" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault04">Total Deduction</label>
+                                    <input type="text" name="TotalDeductions" id="TotalDeductions" class="form-control" placeholder="Total Deduction" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault05">Net Salary</label>
+                                    <asp:TextBox ID="txtNetSalary" runat="server" CssClass="form-control" ClientIDMode="Inherit" placeholder="Net Salary"></asp:TextBox>
+                                    <input type="text" name="NetSalary" id="NetSalary" class="form-control" placeholder="Net Salary" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                            <input type="submit" value="Submit" class="btn btn-default ml-auto" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".calculate").each(function () {
+            $(this).keyup(function () {
+                var total = 0;
+                $(".calculate").each(function () {
+                    if (!isNaN(this.value) && this.value.length != 0) {
+                        total += parseFloat(this.value);
+                    }
+                });
+                $('#GrossSalary').val(total);
+            });
+        });
+    });
+</script>
+<script type="text/javascript">
+    function SUM() {
+        var num1 = $('#TotalDeductions').val();
+        var num2 = $('#GrossSalary').val();
+        var result = parseFloat(num2) - parseFloat(num1);
+        if (!isNaN(result)) {
+            document.getElementById('NetSalary').value = result;
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".calculateDeduction").each(function () {
+            $(this).keyup(function () {
+                var total = 0;
+                $(".calculateDeduction").each(function () {
+                    if (!isNaN(this.value) && this.value.length != 0) {
+                        total += parseFloat(this.value);
+                    }
+                });
+                $('#TotalDeductions').val(total);
+            });
+        });
+    });
+</script>
