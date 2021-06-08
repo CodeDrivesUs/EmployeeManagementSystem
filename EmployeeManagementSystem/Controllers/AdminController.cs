@@ -178,9 +178,13 @@ namespace EmployeeManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 _salaryLogic.CreateSalary(model);
-                return RedirectToAction("SubmittedLeave");
+                return RedirectToAction("ViewSalary");
             }
             return View();
+        }
+        public ActionResult ViewSalary()
+        {
+            return View(_salaryLogic.GetAllSalaries());
         }
     }
 }

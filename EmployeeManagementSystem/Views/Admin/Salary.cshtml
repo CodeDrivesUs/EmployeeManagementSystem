@@ -25,7 +25,7 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationDefault01">Select Division</label>
-                                    <select class="form-control" name="DevisionId">
+                                    <select class="form-control" name="DisionId">
                                         @foreach (var item in Model._devisions)
                                         {
                                             <option value="@item.Id">@item.DevisionName</option>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationDefault02">Employee</label>
-                                    <select class="form-control" name="DevisionId">
+                                    <select class="form-control" name="EmployeeId">
                                         @foreach (var item in Model._employees)
                                         {
                                             <option value="@item.Id">@item.EmployeeName</option>

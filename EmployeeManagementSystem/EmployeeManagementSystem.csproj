@@ -558,6 +558,7 @@
     <Content Include="Views\Admin\ViewLeave.cshtml" />
     <Content Include="Views\Admin\ProcessLeave.cshtml" />
     <Content Include="Views\Admin\Salary.cshtml" />
+    <Content Include="Views\Admin\ViewSalary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

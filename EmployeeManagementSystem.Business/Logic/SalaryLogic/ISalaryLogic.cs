@@ -10,5 +10,6 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
     public interface ISalaryLogic
     {
         void CreateSalary(SalaryModel model);
+        List<SalaryModel> GetAllSalaries();
     }
 }

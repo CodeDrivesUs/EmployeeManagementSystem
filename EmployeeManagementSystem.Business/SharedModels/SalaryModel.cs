@@ -9,6 +9,8 @@ namespace EmployeeManagementSystem.Business.SharedModels
     public class SalaryModel:PrimaryKey
     {
         public int DisionId { get; set; }
+        public string DivisionName { get; set; }
+        public string EmployeeName { get; set; }
         public int EmployeeId { get; set; }
         public decimal BasicSalary { get; set; }
         public decimal HouseRent { get; set; }
