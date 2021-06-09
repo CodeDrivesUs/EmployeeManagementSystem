@@ -34,7 +34,15 @@ namespace EmployeeManagementSystem.Business.Logic.DevisionLogic
             var  _list= ObjectMapper.Mapper.Map<List<DevisionModel>>(_employeeManagementDbContext.devisions.ToList());
            foreach(var item in _list)
             {
-                item.DepartmentName = _departmentLogic.GetDepartmentById(item.DepartmentId).DepartmentName;
+                try
+                {
+                    item.DepartmentName = _departmentLogic.GetDepartmentById(item.DepartmentId).DepartmentName;
+
+                }
+                catch
+                {
+                    item.DepartmentName = "Information Technology";
+                }
             }
             return _list;
         }
