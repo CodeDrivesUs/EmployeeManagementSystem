@@ -10,7 +10,7 @@ namespace EmployeeManagementSystem.Business.SharedModels
     {
         public int DepartmentId { get; set; }
         public string DevisionName { get; set; }
-        public int MyProperty { get; set; }
+        public string DepartmentName { get; set; }
         public List<DepartmentModel> _allDepartments { get; set; }
         public List<DevisionModel>  _devisions { get; set; }
 

@@ -38,5 +38,9 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
             }
             return _list;
         }
+        public List<SalaryModel> GetAllSalariesByEmployeeId(int Id)
+        {
+            return GetAllSalaries().Where(x => x.EmployeeId == Id).ToList();
+        }
     }
 }

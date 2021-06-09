@@ -11,5 +11,6 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
     {
         void CreateSalary(SalaryModel model);
         List<SalaryModel> GetAllSalaries();
+        List<SalaryModel> GetAllSalariesByEmployeeId(int Id);
     }
 }

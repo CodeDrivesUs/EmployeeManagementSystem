@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
 using EmployeeManagementSystem.Business.Logic.LeaveLogic;
+using EmployeeManagementSystem.Business.Logic.SalaryLogic;
 using EmployeeManagementSystem.Business.SharedModels;
 
 namespace EmployeeManagementSystem.Controllers
@@ -14,8 +15,10 @@ namespace EmployeeManagementSystem.Controllers
     {
         private IEmployeeLogic _employeeLogic;
         private ILeaveLogic _leaveLogic;
+        private ISalaryLogic _salaryLogic;
         public EmployeeController()
         {
+            _salaryLogic = new  SalaryLogic();
             _employeeLogic = new EmployeeLogic();
             _leaveLogic = new LeaveLogic();
         }
@@ -45,11 +48,16 @@ namespace EmployeeManagementSystem.Controllers
             return View(model);
         }
 
+
+        public ActionResult ViewSalary()
+        {
+            return View(_salaryLogic.GetAllSalariesByEmployeeId(GetEmployeeId()));
+        }
         private int GetEmployeeId()
         {
             string username = User.Identity.Name.ToString();
             return _employeeLogic.GetEmployeesIdByEmail(username);
-            
+
         }
     }
 }

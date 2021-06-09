@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 using EmployeeManagementSystem.Business.SharedModels;
 using EmployeeManagementSystem.Repository.DataModels;
 using EmployeeManagementSystem.Business.AutoMapper;
+using EmployeeManagementSystem.Business.Logic.DepartmentLogic;
 
 namespace EmployeeManagementSystem.Business.Logic.DevisionLogic
 {
     public class DevisionLogic:IDevisionLogic
     {
         private readonly EmployeeManagementDbContext _employeeManagementDbContext;
+        private readonly IDepartmentLogic _departmentLogic;
+
         public DevisionLogic()
         {
+            _departmentLogic = new DepartmentLogic.DepartmentLogic();
             _employeeManagementDbContext = new EmployeeManagementDbContext();
         }
         public void CreateDevision(DevisionModel model)
@@ -26,8 +30,13 @@ namespace EmployeeManagementSystem.Business.Logic.DevisionLogic
 
         public List<DevisionModel> GetAllDevisions()
         {
-            var model = _employeeManagementDbContext.devisions.ToList();
-            return ObjectMapper.Mapper.Map<List<DevisionModel>>(model);
+            
+            var  _list= ObjectMapper.Mapper.Map<List<DevisionModel>>(_employeeManagementDbContext.devisions.ToList());
+           foreach(var item in _list)
+            {
+                item.DepartmentName = _departmentLogic.GetDepartmentById(item.DepartmentId).DepartmentName;
+            }
+            return _list;
         }
         public void DeleteDevisions(DevisionModel model)
         {
