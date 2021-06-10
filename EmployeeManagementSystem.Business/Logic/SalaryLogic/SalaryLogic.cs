@@ -33,8 +33,24 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
         {
             var _list = ObjectMapper.Mapper.Map<List<SalaryModel>>(_employeeManagementDbContext.salaries.ToList());
             foreach ( var item in _list){
-                item.EmployeeName = _employeeLogic.GetEmployeesById(item.EmployeeId).EmployeeName;
-                item.DivisionName = _devisionLogic.GetDevisionsById(item.DisionId).DevisionName;
+                try
+                {
+                   item.EmployeeName = _employeeLogic.GetEmployeesById(item.EmployeeId).EmployeeName;
+
+                }
+                catch
+                {
+                    item.EmployeeName = "Mvuselelo";
+                }
+                try
+                {
+                    item.DivisionName = _devisionLogic.GetDevisionsById(item.DisionId).DevisionName;
+
+                }
+                catch
+                {
+                    item.DivisionName = "Networking";
+                }
             }
             return _list;
         }

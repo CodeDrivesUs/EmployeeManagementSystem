@@ -25,7 +25,7 @@
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationDefault01">Select Division</label>
-                                    <select class="form-control" name="DisionId">
+                                    <select class="form-control" name="DisionId" required>
                                         @foreach (var item in Model._devisions)
                                         {
                                             <option value="@item.Id">@item.DevisionName</option>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label" for="validationDefault02">Employee</label>
-                                    <select class="form-control" name="EmployeeId">
+                                    <select class="form-control" name="EmployeeId" required>
                                         @foreach (var item in Model._employees)
                                         {
                                             <option value="@item.Id">@item.EmployeeName</option>
@@ -47,37 +47,37 @@
 
                                 <div class="col-md-6 mb-3">
                                     <label>Basic Salary</label>
-                                    <input type="text" id="BasicSalary" name="BasicSalary" placeholder="Basic Salary" class="form-control calculate" />
+                                    <input type="text" id="BasicSalary" name="BasicSalary" placeholder="Basic Salary" required class="form-control calculate" />
                                 </div>
                             </div>
                             <div class="form-row mb-2">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault03">Houserent Allowance</label>
-                                    <input type="text" id="HouseRent" name="HouseRent" placeholder="Houserent Allowance" class="form-control calculate" />
+                                    <input type="text" id="HouseRent" name="HouseRent" placeholder="Houserent Allowance"required class="form-control calculate" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault04">Medical Allowance</label>
-                                    <input type="text" id="MedicalAllowance" name="MedicalAllowance" placeholder="Medical Allowance" class="form-control calculate" />
+                                    <input type="text" id="MedicalAllowance" name="MedicalAllowance" placeholder="Medical Allowance" required class="form-control calculate" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault05">Speical Allowance</label>
-                                    <input type="text" id="SpecialAllowance" name="SpecialAllowance" placeholder="Speical Allowance" class="form-control calculate" />
+                                    <input type="text" id="SpecialAllowance" name="SpecialAllowance" placeholder="Speical Allowance" required class="form-control calculate" />
                                 </div>
                             </div>
                             <div class="form-row mb-2">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault03">Fuel Allowance</label>
-                                    <input type="text" id="FuelAllowance" name="FuelAllowance" placeholder="Fuel Allowance" class="form-control calculate" />
+                                    <input type="text" id="FuelAllowance" name="FuelAllowance" placeholder="Fuel Allowance" required class="form-control calculate" />
 
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault04">Phone Bill Allowance</label>
-                                    <input type="text" id="PhoneBillAllowance" name="PhoneBillAllowance" placeholder="Phone Bill Allowance" class="form-control calculate" />
+                                    <input type="text" id="PhoneBillAllowance" name="PhoneBillAllowance" placeholder="Phone Bill Allowance" required class="form-control calculate" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault05">Other Allowance</label>
                                     <asp:TextBox ID="txtOtherAllowance" runat="server" CssClass="form-control calculate" placeholder="Other Allowance"></asp:TextBox>
-                                    <input type="text" id="OtherAllowance" name="OtherAllowance" placeholder="Other Allowance" class="form-control calculate" />
+                                    <input type="text" id="OtherAllowance" name="OtherAllowance" placeholder="Other Allowance" required class="form-control calculate" />
                                 </div>
                             </div>
                         
@@ -85,27 +85,26 @@
 
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault04">Tax Deduction</label>
-                                    <input type="text" id="TaxDeductions" name="TaxDeductions" placeholder="Other Tax Deduction" class="form-control calculateDeduction" />
+                                    <input type="text" id="TaxDeductions" name="TaxDeductions" placeholder="Other Tax Deduction" required class="form-control calculateDeduction" />
 
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault05">Other Deduction</label>
-                                    <input type="text" id="OtherDeductions" name="OtherDeductions" onkeypress="SUM()" placeholder="Other Deduction" class="form-control calculateDeduction" />
+                                    <input type="text" id="OtherDeductions" name="OtherDeductions" onkeypress="SUM()" placeholder="Other Deduction" required class="form-control calculateDeduction" />
                                 </div>
                             </div>
                             <div class="form-row mb-2">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault03">Gross Salary</label>
-                                    <input type="text" name="GrossSalary" id="GrossSalary" class="form-control" placeholder="Gross Salary" />
+                                    <input type="text" name="GrossSalary" id="GrossSalary" class="form-control" required readonly placeholder="Gross Salary" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault04">Total Deduction</label>
-                                    <input type="text" name="TotalDeductions" id="TotalDeductions" class="form-control" placeholder="Total Deduction" />
+                                    <input type="text" name="TotalDeductions" id="TotalDeductions" class="form-control" required readonly placeholder="Total Deduction" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault05">Net Salary</label>
-                                    <asp:TextBox ID="txtNetSalary" runat="server" CssClass="form-control" ClientIDMode="Inherit" placeholder="Net Salary"></asp:TextBox>
-                                    <input type="text" name="NetSalary" id="NetSalary" class="form-control" placeholder="Net Salary" />
+                                    <input type="text" name="NetSalary" id="NetSalary" class="form-control" placeholder="Net Salary" readonly required />
                                 </div>
                             </div>
                         </div>
@@ -120,6 +119,17 @@
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
+    function SUM() {
+        var num1 = $('#TotalDeductions').val();
+        var num2 = $('#GrossSalary').val();
+        var result = parseFloat(num2) - parseFloat(num1);
+        if (!isNaN(result)) {
+            console.log(result);
+            document.getElementById('NetSalary').value = result;
+        }
+    }
+</script>
+<script type="text/javascript">
     $(document).ready(function () {
         $(".calculate").each(function () {
             $(this).keyup(function () {
@@ -130,20 +140,12 @@
                     }
                 });
                 $('#GrossSalary').val(total);
+                SUM();
             });
         });
     });
 </script>
-<script type="text/javascript">
-    function SUM() {
-        var num1 = $('#TotalDeductions').val();
-        var num2 = $('#GrossSalary').val();
-        var result = parseFloat(num2) - parseFloat(num1);
-        if (!isNaN(result)) {
-            document.getElementById('NetSalary').value = result;
-        }
-    }
-</script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $(".calculateDeduction").each(function () {
@@ -155,6 +157,7 @@
                     }
                 });
                 $('#TotalDeductions').val(total);
+                SUM();
             });
         });
     });

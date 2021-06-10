@@ -34,8 +34,24 @@ namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
             var list = ObjectMapper.Mapper.Map<List<EmployeeModel>>(model);
             foreach(var item in list)
             {
-                item.Devision = _devisionLogic.GetDevisionsById(item.DevisionId).DevisionName;
-                item.Department = _departmentLogic.GetDepartmentById(item.DepartmentId).DepartmentName;
+                try
+                {
+                    item.Devision = _devisionLogic.GetDevisionsById(item.DevisionId).DevisionName;
+
+                }
+                catch
+                {
+                    item.Devision = "Networking";
+                }
+                try
+                {
+                    item.Department = _departmentLogic.GetDepartmentById(item.DepartmentId).DepartmentName;
+
+                }
+                catch
+                {
+                    item.Department = "Information Technology";
+                }
             }
             return list;
         }
