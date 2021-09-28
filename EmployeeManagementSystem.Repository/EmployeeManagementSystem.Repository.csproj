@@ -56,16 +56,33 @@
     <Compile Include="DataModels\Department.cs" />
     <Compile Include="DataModels\Devision.cs" />
     <Compile Include="DataModels\Employee.cs" />
+    <Compile Include="DataModels\JobVacancy.cs" />
     <Compile Include="DataModels\Leave.cs" />
     <Compile Include="DataModels\PrimaryKey.cs" />
     <Compile Include="DataModels\Salary.cs" />
     <Compile Include="DbContext\EmployeeManagementDbContext.cs" />
+    <Compile Include="Migrations\202109281611537_JobVacancy.cs" />
+    <Compile Include="Migrations\202109281611537_JobVacancy.designer.cs">
+      <DependentUpon>202109281611537_JobVacancy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109281617596_JobVacancysdg.cs" />
+    <Compile Include="Migrations\202109281617596_JobVacancysdg.designer.cs">
+      <DependentUpon>202109281617596_JobVacancysdg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202109281611537_JobVacancy.resx">
+      <DependentUpon>202109281611537_JobVacancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109281617596_JobVacancysdg.resx">
+      <DependentUpon>202109281617596_JobVacancysdg.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

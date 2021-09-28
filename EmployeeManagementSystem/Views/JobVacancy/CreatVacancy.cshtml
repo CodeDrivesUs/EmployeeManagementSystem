@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "CreatVacancy";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model EmployeeManagementSystem.Business.SharedModels.JobVacancyModel
+    @using EmployeeManagementSystem.Business.Enums
+
+<div class="row">
+    <div class="col-xl-12">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Job Vacancy Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+
+                @using (Html.BeginForm(null, null, System.Web.Mvc.FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefaultUsername">Select Department</label>
+                                    <select class="form-control" name="DepartmentId">
+                                        @foreach (var item in Model._allDepartments)
+                                        {
+                                            <option value="@item.Id">@item.DepartmentName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefaultUsername">Select Division</label>
+                                    <select class="form-control" name="DevisionId">
+                                        @foreach (var item in Model._devisions)
+                                        {
+                                            <option value="@item.Id">@item.DevisionName</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefaultUsername">Vacancy Type</label>
+                                    @Html.DropDownList("Type", EnumHelper.GetSelectList(typeof(JobVacancyTypeEnums)), "Select Vacancy Type", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">Tittle</label>
+                                    <input type="text" class="form-control" name="Tittle" placeholder="Enter Tittle" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault02">Expiry Date</label>
+                                    <input type="date" name="ExpiryDate" placeholder="Expiry Date" class="form-control" />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault02">Maximum Number Of Applications</label>
+                                    <input type="number"min="1" name="MaximumNumberOfApplications" placeholder="MaximumNumberOfApplications" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label class="form-label" for="validationDefault02">Description</label>
+                                    <textarea name="Description" id="Description"></textarea>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                                <input type="submit" value="submit" class="btn btn-default ml-auto" />
+                            </div>
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace("Description");
+</script>
