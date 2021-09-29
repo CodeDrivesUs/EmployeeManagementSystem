@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Calendar";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+
+
+
+<link href="~/Content/FullCalendar/lib/main.css" rel="stylesheet" />
+<div id="calendar"></div>
+<style>
+    .completed{
+        background-color:lawngreen;
+    }
+    .incomplete{
+        background-color:orangered;
+    }
+</style>
+<script src="~/Content/FullCalendar/lib/main.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+     document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            dateClick: function () {
+                alert('a day has been clicked!');
+                console.log(this)
+                
+            }
+        });
+         calendar.render();
+
+    });
+    $(function () {
+        $.get('/timesheet/GetMonthly', function (response) {
+            $(response).each(function (Index, value) {
+                console.log(value.date)
+                if (value.IsComplete == true) {
+                    $(`.fc-day[data-date="${value.date}"]`).addClass('completed');
+                } else {
+                    $('.fc-day[data-date="' + value.date + '"]').addClass('incomplete');
+                }
+            });
+        });
+    });
+
+  
+    //dayCellDidMount: function (info) {
+    //    console.log(info.date.getDate());
+    //    let month = info.date.getMonth();
+    //    let day = info.date.getDate();
+    //    if (month < 10) {
+    //        month = '0' + month;
+    //    }
+    //    if (day < 10) {
+    //        day = '0' + day;
+    //    }
+    //    let date = `${info.date.getFullYear()}/${month}/${day}`;
+    //    $.get('/timesheet/GetTotalDaily/?date=' + date, function (value) {
+    //        if (value.IsComplete == true) {
+    //            $(`.fc-day[data-date="${value.date}"]`).addClass('completed');
+    //        } else {
+    //            $('.fc-day[data-date="' + value.date + '"]').addClass('incomplete');
+    //        }
+    //    });
+    //    //  $(`.fc-day[data-date="${value.date}"]`).addClass('completed');
+    //    // $('#fc-day-span-' + info.date.getDate()).parent().parent().addClass('incomplete');;
+    //},
+</script>

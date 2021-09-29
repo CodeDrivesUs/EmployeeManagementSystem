@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+}
+@model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.TimeSheetModel>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div id="panel-4" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    TimeSheet <span class="fw-300"><i>Log</i></span>
+                </h2>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Add Log
+                    </button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+
+                    <HeaderTemplate>
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Start Time</th>
+                                    <th>End time</th>
+                                    <th>Duration</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Description</td>
+                                <td>@item.Start</td>
+                                <td>@item.End</td>
+                                <td>1 hrs</td>
+
+                                <td>@item.DateCreated</td>
+                            </tr>
+                        }
+
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
+                        </table>
+                    </FooterTemplate>
+                    </asp:Repeater>
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" action="/TimeSheet/CreateTimeSheet">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New TimeSheet Log</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Start:
+                                </label>
+                                <input type="time" name="Start" class="from-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    End:
+                                </label>
+                                <input type="time" name="End" class="from-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Description:
+                                </label>
+                                <textarea rows="5" name="Description" class="from-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+      
+    </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+                <
+        </div>
+            </form>
+    </div>
+</div>

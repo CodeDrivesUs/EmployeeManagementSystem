@@ -60,6 +60,7 @@
     <Compile Include="DataModels\Leave.cs" />
     <Compile Include="DataModels\PrimaryKey.cs" />
     <Compile Include="DataModels\Salary.cs" />
+    <Compile Include="DataModels\TimeSheet.cs" />
     <Compile Include="DbContext\EmployeeManagementDbContext.cs" />
     <Compile Include="Migrations\202109281611537_JobVacancy.cs" />
     <Compile Include="Migrations\202109281611537_JobVacancy.designer.cs">
@@ -68,6 +69,10 @@
     <Compile Include="Migrations\202109281617596_JobVacancysdg.cs" />
     <Compile Include="Migrations\202109281617596_JobVacancysdg.designer.cs">
       <DependentUpon>202109281617596_JobVacancysdg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109291434548_timesheet.cs" />
+    <Compile Include="Migrations\202109291434548_timesheet.designer.cs">
+      <DependentUpon>202109291434548_timesheet.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +87,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109281617596_JobVacancysdg.resx">
       <DependentUpon>202109281617596_JobVacancysdg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109291434548_timesheet.resx">
+      <DependentUpon>202109291434548_timesheet.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
