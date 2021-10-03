@@ -1,166 +1,316 @@
-﻿@{ 
+﻿@{
     Layout = null;
 }
+
+<!DOCTYPE html>
 <html>
 <head>
-    
-    <script src='https://cdn.scaledrone.com/scaledrone.min.js'></script>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
-    <style>
-        body {
-            background: #0098ff;
-            display: flex;
-            height: 100vh;
-            margin: 0;
-            align-items: center;
-            justify-content: center;
-            padding: 0 50px;
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        }
+    <title>Peer-to-Peer Cue System --- Reciever</title>
+<style>
+    body {
+        font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+        background-color: white;
+        min-width: 450px;
+    }
 
-        video {
-            max-width: calc(50% - 100px);
-            margin: 0 50px;
-            box-sizing: border-box;
-            border-radius: 2px;
-            padding: 0;
-            background: white;
-        }
+    h1 {
+        font-size: 1.75em;
+    }
 
-        .copy {
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 16px;
-            color: white;
-        }
-    </style>
+    h2 {
+        text-align: center;
+        font-size: 4em;
+    }
+
+    td {
+        width: 50%;
+    }
+
+    input {
+        margin-bottom: 5px;
+    }
+
+    a:visited {
+        color: blue;
+    }
+
+    .display {
+        width: 100%;
+        min-height: 400px;
+        padding-bottom: 20px;
+    }
+
+    .control {
+        width: 100%;
+        padding-bottom: 20px;
+    }
+
+    .control-button {
+        width: 100%;
+        min-height: 50px;
+    }
+
+    .display-box {
+        border: 2px solid black;
+    }
+
+    .title {
+        vertical-align: top;
+    }
+
+    .standby {
+        background-color: red;
+    }
+
+    .go {
+        background-color: green;
+    }
+
+    .fade {
+        background-color: yellow;
+    }
+
+    .off {
+        background-color: gray;
+    }
+
+    .hidden {
+        visibility: hidden;
+    }
+
+    .no-display {
+        display: none;
+    }
+
+    .status {
+        height: 125px;
+        vertical-align: text-top;
+        font-weight: bold;
+        margin-bottom: 10px;
+        border-bottom: 2px solid black;
+    }
+
+    .message {
+        height: 125px;
+        max-height: 125px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid black;
+        overflow: auto;
+    }
+
+    .msg-time {
+        color: blue;
+    }
+
+    .cueMsg {
+        color: orange;
+    }
+
+    .selfMsg {
+        color: green;
+    }
+
+    .peerMsg {
+        color: red;
+    }
+</style>
 </head>
 <body>
-    <div class="copy">Send your URL to a friend to start a video call</div>
-    <video id="localVideo" autoplay muted></video>
-    <video id="remoteVideo" autoplay></video>
+    <table class="display">
+        <tr>
+            <td class="title">Status:</td>
+            <td class="title">Messages:</td>
+        </tr>
+        <tr>
+            <td>
+                <div id="receiver-id" style="font-weight: bold;" title="Copy this ID to the input on send.html.">ID:</div>
+            </td>
+            <td>
+                <input type="text" id="sendMessageBox" placeholder="Enter a message..." autofocus="true" />
+                <button type="button" id="sendButton">Send</button>
+                <button type="button" id="clearMsgsButton">Clear Msgs (Local)</button>
+            </td>
+        </tr>
+        <tr>
+            <td><div id="status" class="status"></div></td>
+            <td><div class="message" id="message"></div></td>
+        </tr>
+     
+    </table>
+    <div>
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
 
-    <script>
-        // Generate random room name if needed
-        if (!location.hash) {
-            location.hash = Math.floor(Math.random() * 0xFFFFFF).toString(16);
-            console.log(location.hash)
-        }
-        const roomHash = location.hash.substring(1);
-        console.log(roomHash)
-        // TODO: Replace with your own channel ID
-        const drone = new ScaleDrone('yS4D5PDEOtzyCwno');
-        // Room name needs to be prefixed with 'observable-'
-        const roomName = 'observable-' + roomHash;
-        const configuration = {
-            iceServers: [{
-                urls: 'stun:stun.l.google.com:19302'
-            }]
-        };
-        let room;
-        let pc;
+    </div>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script type="text/javascript">
+        (function () {
 
+            var lastPeerId = null;
+           
+            var conn = null;
+            var recvId = document.getElementById("receiver-id");
+            var status = document.getElementById("status");
+            var message = document.getElementById("message");
+            var sendMessageBox = document.getElementById("sendMessageBox");
+            var sendButton = document.getElementById("sendButton");
+            var clearMsgsButton = document.getElementById("clearMsgsButton");
+            var localVideo = document.getElementById("localVideo");
+            var remoteVideo = document.getElementById("remoteVideo");
 
-        function onSuccess() { };
-        function onError(error) {
-            console.error(error);
-        };
+            /**
+             * Create the Peer object for our end of the connection.
+             *
+             * Sets up callbacks that handle any events related to our
+             * peer object.
+             */
+            function initialize() {
+                let localStream;
+                navigator.mediaDevices.getUserMedia({
+                    audio: true,
+                    video: true,
+                }).then(stream => {
+                    // Display your local video in #localVideo element
+                    localVideo.srcObject = stream;
+                    localStream = stream;
+                });
+                // Create own peer object with connection to shared PeerJS server
+                //peer = new Peer(null, {
+                //    debug: 2,
+                //    stream: localStream
+                //});
+                var peer = new Peer({
+                    initiator: true,
+                    trickle: false,
+                    stream: localStream
+                })
 
-        drone.on('open', error => {
-            if (error) {
-                return console.error(error);
-            }
-            room = drone.subscribe(roomName);
-            room.on('open', error => {
-                if (error) {
-                    onError(error);
-                }
-            });
-            // We're connected to the room and received an array of 'members'
-            // connected to the room (including us). Signaling server is ready.
-            room.on('members', members => {
-                console.log('MEMBERS', members);
-                // If we are the second user to connect to the room we will be creating the offer
-                const isOfferer = members.length === 2;
-                startWebRTC(isOfferer);
-            });
-        });
+                peer.on('open', function (id) {
+                    // Workaround for peer.reconnect deleting previous id
+                    if (peer.id === null) {
+                        console.log('Received null id from peer open');
+                        peer.id = lastPeerId;
+                    } else {
+                        lastPeerId = peer.id;
+                    }
 
-        // Send signaling data via Scaledrone
-        function sendMessage(message) {
-            drone.publish({
-                room: roomName,
-                message
-            });
-        }
+                    console.log('ID: ' + peer.id);
+                    recvId.innerHTML = "ID: " + peer.id;
+                    status.innerHTML = "Awaiting connection...";
+                });
 
-        function startWebRTC(isOfferer) {
-            pc = new RTCPeerConnection(configuration);
+                peer.on('call', function (call) {
+                    // Answer the call, providing our mediaStream
+                    call.answer(localStream);
+                    call.on('stream', function (stream) {
+                        remoteVideo.srcObject = stream;
+                        remoteVideo.play();
+                    });
 
-            // 'onicecandidate' notifies us whenever an ICE agent needs to deliver a
-            // message to the other peer through the signaling server
-            pc.onicecandidate = event => {
-                if (event.candidate) {
-                    sendMessage({ 'candidate': event.candidate });
-                }
+                });
+                peer.on('connection', function (c) {
+                    // Allow only a single connection
+                    if (conn && conn.open) {
+                        c.on('open', function () {
+                            c.send("Already connected to another client");
+                            setTimeout(function () { c.close(); }, 500);
+                        });
+                        return;
+                    }
+
+                    conn = c;
+                    console.log("Connected to: " + conn.peer);
+                    status.innerHTML = "Connected";
+                    ready();
+                });
+                peer.on('stream', function (stream) {
+                    console.log("stream")
+                    remoteVideo.srcObject = stream
+                    remoteVideo.play()
+                })
+                peer.on('disconnected', function () {
+                    status.innerHTML = "Connection lost. Please reconnect";
+                    console.log('Connection lost. Please reconnect');
+
+                    // Workaround for peer.reconnect deleting previous id
+                    peer.id = lastPeerId;
+                    peer._lastServerId = lastPeerId;
+                    peer.reconnect();
+                });
+                peer.on('close', function () {
+                    conn = null;
+                    status.innerHTML = "Connection destroyed. Please refresh";
+                    console.log('Connection destroyed');
+                });
+                peer.on('error', function (err) {
+                    console.log(err);
+                    alert('' + err);
+                });
             };
 
-            // If user is offerer let the 'negotiationneeded' event create the offer
-            if (isOfferer) {
-                pc.onnegotiationneeded = () => {
-                    pc.createOffer().then(localDescCreated).catch(onError);
-                }
+            /**
+             * Triggered once a connection has been achieved.
+             * Defines callbacks to handle incoming data and connection events.
+             */
+            function ready() {
+                conn.on('data', function (data) {
+                    console.log("Data recieved");
+                   addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
+                });
+                conn.on('close', function () {
+                    status.innerHTML = "Connection reset<br>Awaiting connection...";
+                    conn = null;
+                });
             }
 
-            // When a remote stream arrives display it in the #remoteVideo element
-            pc.onaddstream = event => {
-                remoteVideo.srcObject = event.stream;
-            };
 
-            navigator.mediaDevices.getUserMedia({
-                audio: true,
-                video: true,
-            }).then(stream => {
-                // Display your local video in #localVideo element
-                localVideo.srcObject = stream;
-                // Add your stream to be sent to the conneting peer
-                pc.addStream(stream);
-            }, onError);
+            function addMessage(msg) {
+                var now = new Date();
+                var h = now.getHours();
+                var m = addZero(now.getMinutes());
+                var s = addZero(now.getSeconds());
 
-            // Listen to signaling data from Scaledrone
-            room.on('data', (message, client) => {
-                // Message was sent by us
-                if (client.id === drone.clientId) {
-                    return;
-                }
+                if (h > 12)
+                    h -= 12;
+                else if (h === 0)
+                    h = 12;
 
-                if (message.sdp) {
-                    // This is called after receiving an offer or answer from another peer
-                    pc.setRemoteDescription(new RTCSessionDescription(message.sdp), () => {
-                        // When receiving an offer lets answer it
-                        if (pc.remoteDescription.type === 'offer') {
-                            pc.createAnswer().then(localDescCreated).catch(onError);
-                        }
-                    }, onError);
-                } else if (message.candidate) {
-                    // Add the new ICE candidate to our connections remote description
-                    pc.addIceCandidate(
-                        new RTCIceCandidate(message.candidate), onSuccess, onError
-                    );
+                function addZero(t) {
+                    if (t < 10)
+                        t = "0" + t;
+                    return t;
+                };
+                message.innerHTML = "<br><span class=\"msg-time\">" + h + ":" + m + ":" + s + "</span>  -  " + msg + message.innerHTML;
+            }
+
+
+            // Listen for enter in message box
+            sendMessageBox.addEventListener('keypress', function (e) {
+                var event = e || window.event;
+                var char = event.which || event.keyCode;
+                if (char == '13')
+                    sendButton.click();
+            });
+            // Send message
+            sendButton.addEventListener('click', function () {
+                if (conn && conn.open) {
+                    var msg = sendMessageBox.value;
+                    sendMessageBox.value = "";
+                    conn.send(msg);
+                    console.log("Sent: " + msg)
+                    addMessage("<span class=\"selfMsg\">Self: </span>" + msg);
+                } else {
+                    console.log('Connection is closed');
                 }
             });
-        }
 
-        function localDescCreated(desc) {
-            pc.setLocalDescription(
-                desc,
-                () => sendMessage({ 'sdp': pc.localDescription }),
-                onError
-            );
-        }
+            // Clear messages box
+            clearMsgsButton.addEventListener('click', clearMessages);
+
+            initialize();
+        })();
     </script>
 </body>
 </html>

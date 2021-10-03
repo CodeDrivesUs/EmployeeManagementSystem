@@ -70,6 +70,16 @@ namespace EmployeeManagementSystem.Controllers
             return View(jobApplication);
         }
 
+        public ActionResult Reject(int? Id)
+        {
+            if (Id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            _jobApplicationLogic.RejectJobApplication((int)Id);
+            return RedirectToAction("JobApplications");
+        }
+
         public ActionResult ViewPDF(int? Id)
         {
             if (Id == null)
@@ -82,6 +92,12 @@ namespace EmployeeManagementSystem.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             }
             return View(jobApplication);
+        }
+
+        public ActionResult CreateInterview(InterviewModel model)
+        {
+            _jobApplicationLogic.CreateInterview(model);
+            return RedirectToAction("");
         }
 
     }

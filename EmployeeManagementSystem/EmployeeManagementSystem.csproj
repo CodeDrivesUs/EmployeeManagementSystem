@@ -722,6 +722,7 @@
     <Content Include="Views\JobVacancy\JobApplications.cshtml" />
     <Content Include="Views\JobVacancy\JobApplication.cshtml" />
     <Content Include="Views\JobVacancy\ViewPDF.cshtml" />
+    <Content Include="Views\Room\Sender.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

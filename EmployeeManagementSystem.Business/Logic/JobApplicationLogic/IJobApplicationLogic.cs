@@ -12,5 +12,7 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
         void CreateJobApplication(JobApplicationModel model);
         List<JobApplicationModel> GetAllActiveApplications();
         JobApplicationModel GetJobApplication(int Id);
+        void RejectJobApplication(int Id);
+        void CreateInterview(InterviewModel model);
     }
 }

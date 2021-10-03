@@ -33,13 +33,12 @@
                     <li><strong>Last Name :</strong>@Model.LastName</li>
                     <li><strong>Cell Phone :</strong>@Model.Cellphone</li>
                     <li><strong>Email :</strong>@Model.Email</li>
-
                 </ul>
             </div>
             <div class="panel-footer" style="color:white;">
                 <a class="btn btn-primary" onclick="viewpdf('@Model.Id')">View CV</a>
-                <a class="btn btn-success">Schedule Interview</a>
-                <a class="btn btn-danger">Reject</a>
+                <a class="btn btn-success"  data-toggle="modal" data-target="#exampleModal">Schedule Interview</a>
+                <a class="btn btn-danger" href="/JobVacancy/Reject/?Id=@Model.Id" >Reject</a>
             </div>
         </div>
     </div>
@@ -50,13 +49,36 @@
         <form method="post" action="/Home/CreatJobApplication" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">View CV</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Schedule Interview</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <embed src="@Cvsrc" width="800" height="2100" />
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Date:
+                                </label>
+                                <input type="date" name="Date" class="from-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    Start:
+                                </label>
+                                <input type="time" name="Start" class="from-control" />
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">
+                                    End:
+                                </label>
+                                <input type="time" name="End" class="from-control" />
+                            </div>
+                           
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -68,7 +90,6 @@
 </div>
 
 <script>
-
     var viewpdf = function (base64EncodedPDF) {
     window.open("/Jobvacancy/viewPDf/?Id=" + escape(base64EncodedPDF));
     };

@@ -42,9 +42,33 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
             return ObjectMapper.Mapper.Map<List<JobApplicationModel>>(_employeeManagementDbContext.jobApplications.Where(x=>x.StatusId== (int)JobApplicationStatusEnums.Submitted).ToList());
         }
 
+        public void RejectJobApplication(int Id)
+        {
+            var jobapplication = _employeeManagementDbContext.jobApplications.Find(Id);
+            jobapplication.StatusId = (int)JobApplicationStatusEnums.Rejected;
+            _employeeManagementDbContext.SaveChanges();
+            var vacancy = _jobVacancyLogic.GetJobVacancyById(jobapplication.VacancyId);
+            var jobapplicationmodel = ObjectMapper.Mapper.Map<JobApplicationModel>(jobapplication);
+            jobapplicationmodel.VacancyTittle = vacancy.Tittle;
+            var email = new JobRejectionEmail(jobapplicationmodel);
+            try { email.SendMail(); }
+            catch { }
+        }
+
         public JobApplicationModel GetJobApplication(int Id)
         {
             return ObjectMapper.Mapper.Map<JobApplicationModel>(_employeeManagementDbContext.jobApplications.Find(Id));
         }
+
+        public void CreateInterview(InterviewModel model)
+        {
+            model.DateCreated = DateTime.Now;
+            model.RoomId = new Guid();
+            _employeeManagementDbContext.interviews.Add(ObjectMapper.Mapper.Map<Interview>(model));
+            var jobapplication = _employeeManagementDbContext.jobApplications.Find(model.JobApplicationId);
+            jobapplication.StatusId = (int)JobApplicationStatusEnums.AwaitingInterView;
+            _employeeManagementDbContext.SaveChanges();
+        }
+
     }
 }

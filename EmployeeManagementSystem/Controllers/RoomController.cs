@@ -13,5 +13,11 @@ namespace EmployeeManagementSystem.Controllers
         {
             return View();
         }
+        
+        public ActionResult Sender()
+        {
+            return View();
+        }
+
     }
 }
