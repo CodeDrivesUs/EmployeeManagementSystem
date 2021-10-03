@@ -9,13 +9,18 @@ namespace EmployeeManagementSystem.Repository.DataModels
     public class Salary:PrimaryKey
     {
         public int DisionId { get; set; }
+        public string DivisionName { get; set; }
+        public string EmployeeName { get; set; }
         public int EmployeeId { get; set; }
         public decimal BasicSalary { get; set; }
         public decimal HouseRent { get; set; }
+        public decimal PensionFund { get; set; }
         public decimal MedicalAllowance { get; set; }
+        public decimal UIF { get; set; }
         public decimal SpecialAllowance { get; set; }
         public decimal FuelAllowance { get; set; }
         public decimal PhoneBillAllowance { get; set; }
+        public decimal TravelAllowance { get; set; }
         public decimal OtherAllowance { get; set; }
         public decimal TaxDeductions { get; set; }
         public decimal OtherDeductions { get; set; }

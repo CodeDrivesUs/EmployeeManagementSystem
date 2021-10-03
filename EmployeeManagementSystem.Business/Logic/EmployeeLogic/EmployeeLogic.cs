@@ -17,6 +17,7 @@ namespace EmployeeManagementSystem.Business.Logic.EmployeeLogic
         private readonly EmployeeManagementDbContext _employeeManagementDbContext;
         private readonly IDepartmentLogic _departmentLogic;
         private readonly IDevisionLogic _devisionLogic;
+
         public EmployeeLogic()
         {
             _departmentLogic = new DepartmentLogic.DepartmentLogic();

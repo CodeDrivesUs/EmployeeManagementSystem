@@ -1,0 +1,75 @@
+﻿@model EmployeeManagementSystem.Business.SharedModels.JobApplicationModel
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var base64 = Convert.ToBase64String(Model.Cv);
+    var Cvsrc = string.Format("data:application/pdf;base64,{0}", base64);
+}
+
+
+<div class="row">
+    <div class="col-lg-8">
+
+        <div class="panel panel-default container">
+            <div class="panel-heading">
+                <h2 class="text-center"><strong>@Model.JobVacancy.Tittle</strong></h2>
+                <span class="pull-left">Expiry Date:<span class="text-danger">@Model.JobVacancy.ExpiryDate.ToLongDateString()</span></span>
+            </div>
+            <div class="panel-body">
+                <div>
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.JobVacancy.Description))
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><strong class="text-center">Applicant Details</strong></h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li><strong>First Name :</strong>@Model.FirstName</li>
+                    <li><strong>Last Name :</strong>@Model.LastName</li>
+                    <li><strong>Cell Phone :</strong>@Model.Cellphone</li>
+                    <li><strong>Email :</strong>@Model.Email</li>
+
+                </ul>
+            </div>
+            <div class="panel-footer" style="color:white;">
+                <a class="btn btn-primary" onclick="viewpdf('@Model.Id')">View CV</a>
+                <a class="btn btn-success">Schedule Interview</a>
+                <a class="btn btn-danger">Reject</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" action="/Home/CreatJobApplication" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">View CV</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <embed src="@Cvsrc" width="800" height="2100" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    var viewpdf = function (base64EncodedPDF) {
+    window.open("/Jobvacancy/viewPDf/?Id=" + escape(base64EncodedPDF));
+    };
+</script>

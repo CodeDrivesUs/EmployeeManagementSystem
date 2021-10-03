@@ -23,6 +23,8 @@ namespace EmployeeManagementSystem.Business.Logic.TimeSheetLogic
         public void CreateTimeSheetLog( TimeSheetModel model)
         {
             model.DateCreated = DateTime.Now;
+            model.Start = Convert.ToDateTime($"{model.Date.ToShortDateString()}  {model.Start.ToShortTimeString()}");
+            model.End = Convert.ToDateTime($"{model.Date.ToShortDateString()}  {model.End.ToShortTimeString()}");
             _employeeManagementDbContext.timeSheets.Add(ObjectMapper.Mapper.Map<TimeSheet>(model));
             _employeeManagementDbContext.SaveChanges();
         }
@@ -31,6 +33,20 @@ namespace EmployeeManagementSystem.Business.Logic.TimeSheetLogic
         {
             return ObjectMapper.Mapper.Map<List<TimeSheetModel>>(_employeeManagementDbContext.timeSheets.Where(x => x.UserId == userId).ToList());
         }
+
+        public void DeleteById(int Id)
+        {
+            var timesheet = _employeeManagementDbContext.timeSheets.Find(Id);
+            _employeeManagementDbContext.timeSheets.Remove(timesheet);
+            _employeeManagementDbContext.SaveChanges();
+        }
+        
+        public TimeSheetModel GetById(int Id)
+        {
+            return ObjectMapper.Mapper.Map<TimeSheetModel>( _employeeManagementDbContext.timeSheets.Find(Id));
+           
+        }
+
 
         public List<MontlyTimeSheetCalendar> GetMonthly(string userId)
         {
@@ -101,7 +117,8 @@ namespace EmployeeManagementSystem.Business.Logic.TimeSheetLogic
             }
             return model;
         }
-            public List<TimeSheetModel> GetTimeSheetsForADay(DateTime date, string userId)
+
+        public List<TimeSheetModel> GetTimeSheetsForADay(DateTime date, string userId)
         {
             var  list =ObjectMapper.Mapper.Map<List<TimeSheetModel>>(_employeeManagementDbContext.timeSheets.Where(x => x.UserId==userId).ToList());
             return list.Where(x => x.Start.Date == date.Date).ToList();

@@ -37,15 +37,29 @@
                                 </a>
                             </div>
 
-                            <a href="/Account/Register" class="btn-link text-white ml-auto">
-                                Create Account
-                            </a> 
-                            <a href="/Account/Login" class="btn-link text-white" style="margin-left:20px;">
-                                Login
-                            </a>
+                            @if (!Request.IsAuthenticated)
+                            {
+                                <a href="/Account/Register" class="btn-link text-white ml-auto">
+                                    Create Account
+                                </a>
+                                <a href="/Account/Login" class="btn-link text-white" style="margin-left:20px;">
+                                    Login
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/Account/Register" class="btn-link text-white ml-auto">
+                                    @User.Identity.GetUserName()
+                                </a>
+                                <a href="/Account/Logoff" class="btn-link text-white" style="margin-left:20px;">
+                                    Log Out
+                                </a>
+                            }
                         </div>
                     </div>
-                    @RenderBody()
+                    <div style="background-color:whitesmoke;">
+                        @RenderBody()
+                    </div>
                 </div>
             </div>
         </div>

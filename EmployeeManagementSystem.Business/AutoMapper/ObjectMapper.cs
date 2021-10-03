@@ -22,6 +22,7 @@ namespace EmployeeManagementSystem.Business.AutoMapper
                 cfg.CreateMap<Salary, SalaryModel>().ReverseMap();
                 cfg.CreateMap<JobVacancy, JobVacancyModel>().ReverseMap();
                 cfg.CreateMap<TimeSheet, TimeSheetModel>().ReverseMap();
+                cfg.CreateMap<JobApplication, JobApplicationModel>().ReverseMap();
             });
             var mapper = config.CreateMapper();
             return mapper;

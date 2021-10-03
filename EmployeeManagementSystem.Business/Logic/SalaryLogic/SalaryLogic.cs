@@ -26,6 +26,14 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
         public void CreateSalary(SalaryModel model)
         {
             model.CreatedOn = DateTime.Now;
+
+            model.MedicalAllowance = model.calcMedAid();
+            model.PensionFund = model.calcPensionfund();
+            model.UIF = model.calcUIF();
+            model.GrossSalary = model.calcGrossSalary();
+            model.TotalDeductions = model.calcDeduction();
+            model.TaxDeductions = model.calcTax();
+            model.NetSalary = model.calcNetSalary();
             _employeeManagementDbContext.salaries.Add(ObjectMapper.Mapper.Map<Salary>(model));
             _employeeManagementDbContext.SaveChanges();
         }

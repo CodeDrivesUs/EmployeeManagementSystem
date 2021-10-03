@@ -62,7 +62,7 @@ namespace EmployeeManagementSystem.Business.Logic.EmailLogic.BaseEmail
             smtp.EnableSsl = true;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("21731031@dut4life.ac.za", "$$");
+            smtp.Credentials = new NetworkCredential("21731031@dut4life.ac.za", "");
             smtp.Send(mc);
         }
     }

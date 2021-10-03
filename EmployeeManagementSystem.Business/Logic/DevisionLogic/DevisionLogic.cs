@@ -46,7 +46,13 @@ namespace EmployeeManagementSystem.Business.Logic.DevisionLogic
             }
             return _list;
         }
-        public void DeleteDevisions(DevisionModel model)
+
+        public List<DevisionModel> GetAllDevisionsForADepartment(int department)
+        {
+            return ObjectMapper.Mapper.Map<List<DevisionModel>>(_employeeManagementDbContext.devisions.Where(x => x.DepartmentId == department).ToList());
+        }
+
+         public void DeleteDevisions(DevisionModel model)
         {
             _employeeManagementDbContext.devisions.Remove(_employeeManagementDbContext.devisions.Find(model.Id));
             _employeeManagementDbContext.SaveChanges();

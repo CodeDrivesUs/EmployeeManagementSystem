@@ -2,8 +2,14 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    var date = (DateTime)ViewBag.date;
 }
 @model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.TimeSheetModel>
+
+<div >
+   
+   <h2>Timesheet Logs For @date.ToLongDateString() </h2>
+</div>
 
 <div class="row">
     <div class="col-lg-12">
@@ -25,10 +31,12 @@
                         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                             <thead class="bg-warning-200">
                                 <tr>
+                                    <th>Action</th>
                                     <th>Description</th>
                                     <th>Start Time</th>
                                     <th>End time</th>
                                     <th>Duration</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,14 +44,26 @@
                     <ItemTemplate>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>@item.Description</td>
-                                <td>@item.Start</td>
-                                <td>@item.End</td>
-                                <td>1 hrs</td>
+                        <tr>
+                            <td>
+                                <a class="btn btn-danger btn-sm" href="/Timesheet/Delete?Id=@item.Id&date=@date">
 
-                                <td>@item.DateCreated</td>
-                            </tr>
+                                    <i class="fal fa-trash"></i>Delete
+                                </a>
+                            </td>
+                            <td>@item.Description</td>
+                            <td>@item.Start.ToLongTimeString()</td>
+                            <td>@item.End.ToLongTimeString()</td>
+                            <td>
+                                @{
+                                    TimeSpan diff = (item.End - item.Start);
+                                    string duration = $"{diff.Hours} hr {diff.Minutes} min";
+                                    <span>@duration</span>
+                            }
+                        </td>
+
+                        <td>@item.DateCreated</td>
+                        </tr>
                         }
 
                     </ItemTemplate>
@@ -61,10 +81,6 @@
 
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -82,6 +98,7 @@
                     <div class="panel-content p-0">
                         <div class="panel-content">
                             @Html.AntiForgeryToken()
+                            <input type="hidden" name="Date" value="@date"/>
                             <div class="form-group">
                                 <label class="form-label">
                                     Start:

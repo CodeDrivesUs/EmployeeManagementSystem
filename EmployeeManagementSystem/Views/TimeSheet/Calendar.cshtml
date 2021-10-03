@@ -23,10 +23,40 @@
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
-            dateClick: function () {
-                alert('a day has been clicked!');
-                console.log(this)
-                
+            dateClick: function (info) {
+               
+                let month = info.date.getMonth();
+                let day = info.date.getDate();
+                month = (month + 1);
+                if (month < 10) {
+                    month = '0' + month;
+                }
+               
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                let date = `${info.date.getFullYear()}/${month}/${day}`;
+                window.location.replace('/TimeSheet/Index/?date=' + date);
+            },
+            dayCellDidMount: function (info) {
+                console.log(info.date.getDate());
+                let month = info.date.getMonth();
+                let day = info.date.getDate();
+                if (month < 10) {
+                    month = '0' + month;
+                }
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                let date = `${info.date.getFullYear()}/${month}/${day}`;
+                $.get('/timesheet/GetTotalDaily/?date=' + date, function (value) {
+                    if (value.IsComplete == true) {
+                        $(`.fc-day[data-date="${value.date}"]`).addClass('completed');
+                    } else {
+                        $('.fc-day[data-date="' + value.date + '"]').addClass('incomplete');
+                    }
+                });
+
             }
         });
          calendar.render();
@@ -46,25 +76,5 @@
     });
 
   
-    //dayCellDidMount: function (info) {
-    //    console.log(info.date.getDate());
-    //    let month = info.date.getMonth();
-    //    let day = info.date.getDate();
-    //    if (month < 10) {
-    //        month = '0' + month;
-    //    }
-    //    if (day < 10) {
-    //        day = '0' + day;
-    //    }
-    //    let date = `${info.date.getFullYear()}/${month}/${day}`;
-    //    $.get('/timesheet/GetTotalDaily/?date=' + date, function (value) {
-    //        if (value.IsComplete == true) {
-    //            $(`.fc-day[data-date="${value.date}"]`).addClass('completed');
-    //        } else {
-    //            $('.fc-day[data-date="' + value.date + '"]').addClass('incomplete');
-    //        }
-    //    });
-    //    //  $(`.fc-day[data-date="${value.date}"]`).addClass('completed');
-    //    // $('#fc-day-span-' + info.date.getDate()).parent().parent().addClass('incomplete');;
-    //},
+   
 </script>

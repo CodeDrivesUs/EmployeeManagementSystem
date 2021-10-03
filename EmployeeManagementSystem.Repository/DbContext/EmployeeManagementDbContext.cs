@@ -18,6 +18,8 @@ namespace EmployeeManagementSystem.Repository.DbContext
         public DbSet<Leave>  leaves { get; set; }
         public DbSet<Salary> salaries  { get; set; }
         public DbSet<JobVacancy> jobVacancies  { get; set; }
+        public DbSet<JobApplication> jobApplications   { get; set; }
+        public DbSet<Attachment> attachments    { get; set; }
         public DbSet<TimeSheet>  timeSheets  { get; set; }
 
     }

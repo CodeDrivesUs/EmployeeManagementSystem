@@ -13,5 +13,6 @@ namespace EmployeeManagementSystem.Business.Logic.DevisionLogic
         List<DevisionModel> GetAllDevisions();
         void DeleteDevisions(DevisionModel model);
         DevisionModel GetDevisionsById(int Id);
+        List<DevisionModel> GetAllDevisionsForADepartment(int department);
     }
 }

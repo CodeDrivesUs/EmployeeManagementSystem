@@ -717,6 +717,11 @@
     <Content Include="Views\Room\Index.cshtml" />
     <Content Include="Views\TimeSheet\Index.cshtml" />
     <Content Include="Views\TimeSheet\Calendar.cshtml" />
+    <Content Include="Views\Home\VacabcyDetails.cshtml" />
+    <Content Include="Views\Home\VacabcyForDepartment.cshtml" />
+    <Content Include="Views\JobVacancy\JobApplications.cshtml" />
+    <Content Include="Views\JobVacancy\JobApplication.cshtml" />
+    <Content Include="Views\JobVacancy\ViewPDF.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

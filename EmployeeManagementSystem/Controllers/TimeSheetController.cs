@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EmployeeManagementSystem.Business.Logic.TimeSheetLogic;
@@ -20,22 +21,35 @@ namespace EmployeeManagementSystem.Controllers
         }
 
         // GET: TimeSheet
-        public ActionResult Index()
+        public ActionResult Index(DateTime? date)
         {
-            return View(_timeSheetLogic.GetTimeSheetsForAUser(User.Identity.GetUserId()));
+            if (date==null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.date = date;
+            return View(_timeSheetLogic.GetTimeSheetsForADay((DateTime)date,User.Identity.GetUserId()));
         }
 
         public ActionResult Calendar(string userId)
         {
             return View();
         }
+        
+        public ActionResult Delete(int Id, DateTime date)
+        {
+            _timeSheetLogic.DeleteById(Id);
+            return RedirectToAction("Index", new { date = date });
+        }
+
+        
 
         [HttpPost,ValidateAntiForgeryToken]
         public ActionResult CreateTimeSheet(TimeSheetModel model)
         {
             model.UserId = User.Identity.GetUserId();
             _timeSheetLogic.CreateTimeSheetLog(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { date=model.Date});
         }
 
         public JsonResult GetMonthly() 

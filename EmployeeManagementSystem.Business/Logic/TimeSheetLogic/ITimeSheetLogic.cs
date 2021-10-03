@@ -14,5 +14,7 @@ namespace EmployeeManagementSystem.Business.Logic.TimeSheetLogic
         List<TimeSheetModel> GetTimeSheetsForADay(DateTime date, string userId);
         List<MontlyTimeSheetCalendar> GetMonthly(string userId);
         MontlyTimeSheetCalendar GetTotalDay(string date, string userId);
+        TimeSheetModel GetById(int Id);
+        void DeleteById(int Id);
     }
 }

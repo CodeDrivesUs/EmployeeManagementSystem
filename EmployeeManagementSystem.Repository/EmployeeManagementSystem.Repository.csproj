@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\Attachment.cs" />
     <Compile Include="DataModels\Department.cs" />
     <Compile Include="DataModels\Devision.cs" />
     <Compile Include="DataModels\Employee.cs" />
+    <Compile Include="DataModels\JobApplication.cs" />
     <Compile Include="DataModels\JobVacancy.cs" />
     <Compile Include="DataModels\Leave.cs" />
     <Compile Include="DataModels\PrimaryKey.cs" />
@@ -74,6 +76,22 @@
     <Compile Include="Migrations\202109291434548_timesheet.designer.cs">
       <DependentUpon>202109291434548_timesheet.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202109300944434_jobApplication.cs" />
+    <Compile Include="Migrations\202109300944434_jobApplication.designer.cs">
+      <DependentUpon>202109300944434_jobApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109301647180_salarymodelUpdate.cs" />
+    <Compile Include="Migrations\202109301647180_salarymodelUpdate.designer.cs">
+      <DependentUpon>202109301647180_salarymodelUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202109301703193_salarymodelUpdatefg.cs" />
+    <Compile Include="Migrations\202109301703193_salarymodelUpdatefg.designer.cs">
+      <DependentUpon>202109301703193_salarymodelUpdatefg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202110012041468_lastaname.cs" />
+    <Compile Include="Migrations\202110012041468_lastaname.designer.cs">
+      <DependentUpon>202110012041468_lastaname.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,6 +108,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202109291434548_timesheet.resx">
       <DependentUpon>202109291434548_timesheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109300944434_jobApplication.resx">
+      <DependentUpon>202109300944434_jobApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301647180_salarymodelUpdate.resx">
+      <DependentUpon>202109301647180_salarymodelUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202109301703193_salarymodelUpdatefg.resx">
+      <DependentUpon>202109301703193_salarymodelUpdatefg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202110012041468_lastaname.resx">
+      <DependentUpon>202110012041468_lastaname.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

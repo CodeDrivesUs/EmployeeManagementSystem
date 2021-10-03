@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\ObjectMapper.cs" />
+    <Compile Include="Enums\JobApplicationStatusEnums.cs" />
     <Compile Include="Enums\JobVacancyTypeEnums.cs" />
     <Compile Include="Enums\LeavestatusEnum.cs" />
     <Compile Include="Logic\DepartmentLogic\DepartmentLogic.cs" />
@@ -64,9 +65,12 @@
     <Compile Include="Logic\DevisionLogic\IDevisionLogic.cs" />
     <Compile Include="Logic\EmailLogic\BaseEmail\Email.cs" />
     <Compile Include="Logic\EmailLogic\Template\EmployeeJobVacancyEmail.cs" />
+    <Compile Include="Logic\EmailLogic\Template\JobApplicationEmail.cs" />
     <Compile Include="Logic\EmployeeLogic\EmployeeLogic.cs" />
     <Compile Include="Logic\EmployeeLogic\IEmployeeLogic.cs" />
     <Compile Include="Logic\JobVacancyLogic\IJobVacancyLogic.cs" />
+    <Compile Include="Logic\JobApplicationLogic\IJobApplicationLogic.cs" />
+    <Compile Include="Logic\JobApplicationLogic\JobApplicationLogic.cs" />
     <Compile Include="Logic\JobVacancyLogic\JobVacancyLogic.cs" />
     <Compile Include="Logic\LeaveLogic\ILeaveLogic.cs" />
     <Compile Include="Logic\LeaveLogic\LeaveLogic.cs" />
@@ -78,7 +82,9 @@
     <Compile Include="SharedModels\DepartmentModel.cs" />
     <Compile Include="SharedModels\DevisionModel.cs" />
     <Compile Include="SharedModels\EmployeeModel.cs" />
+    <Compile Include="SharedModels\JobApplicationModel.cs" />
     <Compile Include="SharedModels\JobVacancyModel.cs" />
+    <Compile Include="SharedModels\JobVacancy\JobVacancyByDivision.cs" />
     <Compile Include="SharedModels\LeaveModel.cs" />
     <Compile Include="SharedModels\MontlyTimeSheetCalendar.cs" />
     <Compile Include="SharedModels\PrimaryKey.cs" />
