@@ -64,11 +64,30 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
         {
             model.DateCreated = DateTime.Now;
             model.RoomId = new Guid();
-            _employeeManagementDbContext.interviews.Add(ObjectMapper.Mapper.Map<Interview>(model));
+            var interview = ObjectMapper.Mapper.Map<Interview>(model);
+            _employeeManagementDbContext.interviews.Add(interview);
             var jobapplication = _employeeManagementDbContext.jobApplications.Find(model.JobApplicationId);
             jobapplication.StatusId = (int)JobApplicationStatusEnums.AwaitingInterView;
             _employeeManagementDbContext.SaveChanges();
+            var jobModel = ObjectMapper.Mapper.Map<JobApplicationModel>(jobapplication);
+            jobModel.VacancyTittle = _jobVacancyLogic.GetJobVacancyById(jobapplication.VacancyId).Tittle;
+            model.Id = interview.Id;
+            var email = new JobInterviewEmail(model,jobModel);
+            try { email.SendMail(); }
+            catch { }
         }
 
-    }
+        public InterviewModel GetInterInterview(int Id)
+        {
+            return ObjectMapper.Mapper.Map<InterviewModel>(_employeeManagementDbContext.interviews.Find(Id));
+        }
+
+        public void SetInterviwerPeerId(string peerId, int Id)
+        {
+            var interview = _employeeManagementDbContext.interviews.Find(Id);
+            interview.InterviewrPeerId = peerId;
+            _employeeManagementDbContext.SaveChanges();
+        }
+
+        }
 }

@@ -94,10 +94,11 @@ namespace EmployeeManagementSystem.Controllers
             return View(jobApplication);
         }
 
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult CreateInterview(InterviewModel model)
         {
             _jobApplicationLogic.CreateInterview(model);
-            return RedirectToAction("");
+            return RedirectToAction("JobApplications");
         }
 
     }

@@ -1,123 +1,129 @@
 ﻿@{
     Layout = null;
 }
-
+@model EmployeeManagementSystem.Business.SharedModels.InterviewModel
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width">
     <title>Peer-to-Peer Cue System --- Reciever</title>
-<style>
-    body {
-        font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
-        background-color: white;
-        min-width: 450px;
-    }
+    <style>
+        body {
+            font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif;
+            background-color: white;
+            min-width: 450px;
+        }
 
-    h1 {
-        font-size: 1.75em;
-    }
+        h1 {
+            font-size: 1.75em;
+        }
 
-    h2 {
-        text-align: center;
-        font-size: 4em;
-    }
+        h2 {
+            text-align: center;
+            font-size: 4em;
+        }
 
-    td {
-        width: 50%;
-    }
+        td {
+            width: 50%;
+        }
 
-    input {
-        margin-bottom: 5px;
-    }
+        input {
+            margin-bottom: 5px;
+        }
 
-    a:visited {
-        color: blue;
-    }
+        a:visited {
+            color: blue;
+        }
 
-    .display {
-        width: 100%;
-        min-height: 400px;
-        padding-bottom: 20px;
-    }
+        .display {
+            width: 100%;
+            min-height: 400px;
+            padding-bottom: 20px;
+        }
 
-    .control {
-        width: 100%;
-        padding-bottom: 20px;
-    }
+        .control {
+            width: 100%;
+            padding-bottom: 20px;
+        }
 
-    .control-button {
-        width: 100%;
-        min-height: 50px;
-    }
+        .control-button {
+            width: 100%;
+            min-height: 50px;
+        }
 
-    .display-box {
-        border: 2px solid black;
-    }
+        .display-box {
+            border: 2px solid black;
+        }
 
-    .title {
-        vertical-align: top;
-    }
+        .title {
+            vertical-align: top;
+        }
 
-    .standby {
-        background-color: red;
-    }
+        .standby {
+            background-color: red;
+        }
 
-    .go {
-        background-color: green;
-    }
+        .go {
+            background-color: green;
+        }
 
-    .fade {
-        background-color: yellow;
-    }
+        .fade {
+            background-color: yellow;
+        }
 
-    .off {
-        background-color: gray;
-    }
+        .off {
+            background-color: gray;
+        }
 
-    .hidden {
-        visibility: hidden;
-    }
+        .hidden {
+            visibility: hidden;
+        }
 
-    .no-display {
-        display: none;
-    }
+        .no-display {
+            display: none;
+        }
 
-    .status {
-        height: 125px;
-        vertical-align: text-top;
-        font-weight: bold;
-        margin-bottom: 10px;
-        border-bottom: 2px solid black;
-    }
+        .status {
+            height: 125px;
+            vertical-align: text-top;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 2px solid black;
+        }
 
-    .message {
-        height: 125px;
-        max-height: 125px;
-        margin-bottom: 10px;
-        border-bottom: 2px solid black;
-        overflow: auto;
-    }
+        .message {
+            height: 125px;
+            max-height: 125px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid black;
+            overflow: auto;
+        }
 
-    .msg-time {
-        color: blue;
-    }
+        .msg-time {
+            color: blue;
+        }
 
-    .cueMsg {
-        color: orange;
-    }
+        .cueMsg {
+            color: orange;
+        }
 
-    .selfMsg {
-        color: green;
-    }
+        .selfMsg {
+            color: green;
+        }
 
-    .peerMsg {
-        color: red;
-    }
-</style>
+        .peerMsg {
+            color: red;
+        }
+    </style>
 </head>
 <body>
+
+    <div>
+        <video id="localVideo" autoplay muted></video>
+        <video id="remoteVideo" autoplay></video>
+
+    </div>
     <table class="display">
         <tr>
             <td class="title">Status:</td>
@@ -137,19 +143,15 @@
             <td><div id="status" class="status"></div></td>
             <td><div class="message" id="message"></div></td>
         </tr>
-     
-    </table>
-    <div>
-        <video id="localVideo" autoplay muted></video>
-        <video id="remoteVideo" autoplay></video>
 
-    </div>
+    </table>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
     <script type="text/javascript">
         (function () {
 
             var lastPeerId = null;
-           
+
             var conn = null;
             var recvId = document.getElementById("receiver-id");
             var status = document.getElementById("status");
@@ -188,7 +190,7 @@
                 })
 
                 peer.on('open', function (id) {
-                    // Workaround for peer.reconnect deleting previous id
+                    // Workaround foMoModeloIddelel peer.reconnect deleting previous id
                     if (peer.id === null) {
                         console.log('Received null id from peer open');
                         peer.id = lastPeerId;
@@ -199,6 +201,7 @@
                     console.log('ID: ' + peer.id);
                     recvId.innerHTML = "ID: " + peer.id;
                     status.innerHTML = "Awaiting connection...";
+                    initiateInterViewer(peer.id);
                 });
 
                 peer.on('call', function (call) {
@@ -257,13 +260,20 @@
             function ready() {
                 conn.on('data', function (data) {
                     console.log("Data recieved");
-                   addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
+                    addMessage("<span class=\"peerMsg\">Peer: </span>" + data);
                 });
                 conn.on('close', function () {
                     status.innerHTML = "Connection reset<br>Awaiting connection...";
                     conn = null;
                 });
             }
+
+            function initiateInterViewer(peerId) {
+
+                $.post("/Room/SetPeerId",{ Id: '@Model.Id', peerId: peerId }, function (response) {
+                    console.log("Initialized")
+                });
+            };
 
 
             function addMessage(msg) {
@@ -307,7 +317,7 @@
             });
 
             // Clear messages box
-            clearMsgsButton.addEventListener('click', clearMessages);
+          //  clearMsgsButton.addEventListener('click', clearMessages);
 
             initialize();
         })();

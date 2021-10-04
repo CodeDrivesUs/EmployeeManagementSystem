@@ -46,7 +46,7 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="post" action="/Home/CreatJobApplication" enctype="multipart/form-data">
+        <form method="post" action="/Jobvacancy/CreateInterview" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Schedule Interview</h5>
@@ -58,23 +58,24 @@
                     <div class="panel-content p-0">
                         <div class="panel-content">
                             @Html.AntiForgeryToken()
+                            <input type="hidden" name="JobApplicationId" value="@Model.Id" />
                             <div class="form-group">
                                 <label class="form-label">
                                     Date:
                                 </label>
-                                <input type="date" name="Date" class="from-control" />
+                                <input type="date" name="Date" required class="from-control" />
                             </div>
                             <div class="form-group">
                                 <label class="form-label">
                                     Start:
                                 </label>
-                                <input type="time" name="Start" class="from-control" />
+                                <input type="time" name="Start" required class="from-control" />
                             </div>
                             <div class="form-group">
                                 <label class="form-label">
                                     End:
                                 </label>
-                                <input type="time" name="End" class="from-control" />
+                                <input type="time" name="End" required class="from-control" />
                             </div>
                            
                         </div>

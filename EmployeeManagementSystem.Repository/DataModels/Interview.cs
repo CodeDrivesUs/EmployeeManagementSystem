@@ -14,5 +14,6 @@ namespace EmployeeManagementSystem.Repository.DataModels
         public int JobApplicationId { get; set; }
         public Guid RoomId { get; set; }
         public DateTime DateCreated { get; set; }
+        public string InterviewrPeerId { get; set; }
     }
 }
