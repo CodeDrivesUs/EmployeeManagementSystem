@@ -30,6 +30,11 @@ namespace EmployeeManagementSystem.Controllers
             {
                 return RedirectToAction("Dashboard","Admin");
             }
+            
+            if (User.IsInRole("Hr"))
+            {
+                return View("view");
+            }
             if (Request.IsAuthenticated)
             {
                 return RedirectToAction("Dashboard", "Employee");

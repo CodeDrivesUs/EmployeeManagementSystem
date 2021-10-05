@@ -55,14 +55,14 @@ namespace EmployeeManagementSystem.Business.Logic.EmailLogic.BaseEmail
 
         public void SendMail()
         {
-            MailMessage mc = new MailMessage("21731031@dut4life.ac.za", _to, _subject, CreateEmailBody());
+            MailMessage mc = new MailMessage("21601754@dut4life.ac.za", _to, _subject, CreateEmailBody());
             mc.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
             smtp.Timeout = 1000000;
             smtp.EnableSsl = true;
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("21731031@dut4life.ac.za", "");
+            smtp.Credentials = new NetworkCredential("21601754@dut4life.ac.za", "Dut970524");
             smtp.Send(mc);
         }
     }

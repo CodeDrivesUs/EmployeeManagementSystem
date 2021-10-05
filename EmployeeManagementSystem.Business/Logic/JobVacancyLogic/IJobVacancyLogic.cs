@@ -15,5 +15,6 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
         List<JobVacancyModel> GetJobVacancyByDepartmentId(int Id);
         List<JobVacancyModel> GetJobVacancyByDivisionId(int Id);
         List<JobVacancyByDivision> JobVacancyByDivisionsByDepartmentId(int Id);
+        List<JobVacancyModel> GetAllJobVacancies();
     }
 }

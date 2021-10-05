@@ -46,6 +46,11 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
             return dbmodel.Id;
         }
 
+        public List<JobVacancyModel> GetAllJobVacancies()
+        {
+            return ObjectMapper.Mapper.Map<List<JobVacancyModel>>(_employeeManagementDbContext.jobVacancies.ToList());
+        } 
+        
         public List<JobVacancyModel> GetJobVacancyByDepartmentId(int Id)
         {
             return ObjectMapper.Mapper.Map<List<JobVacancyModel>>(_employeeManagementDbContext.jobVacancies.Where(x=>x.DepartmentId==Id).ToList());

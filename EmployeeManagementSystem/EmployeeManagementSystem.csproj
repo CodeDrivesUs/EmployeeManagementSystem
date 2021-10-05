@@ -634,6 +634,9 @@
     <Content Include="webfonts\fa-brands-400.svg" />
     <Content Include="webfonts\fa-regular-400.svg" />
     <Content Include="webfonts\fa-solid-900.svg" />
+    <None Include="Properties\PublishProfiles\EmployeeManagement2021 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\EmployeeManagement2021 - ReadOnly - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\EmployeeManagement2021 - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\Group48 - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Group48 - ReadOnly - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Group48 - Web Deploy.pubxml" />
@@ -723,6 +726,9 @@
     <Content Include="Views\JobVacancy\JobApplication.cshtml" />
     <Content Include="Views\JobVacancy\ViewPDF.cshtml" />
     <Content Include="Views\Room\Sender.cshtml" />
+    <Content Include="Views\Shared\_HrLayout.cshtml" />
+    <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\JobVacancy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

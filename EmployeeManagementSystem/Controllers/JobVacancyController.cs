@@ -31,7 +31,7 @@ namespace EmployeeManagementSystem.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View(_jobVacancyLogic.GetAllJobVacancies());
         }
 
         public ActionResult CreatVacancy()
@@ -45,7 +45,7 @@ namespace EmployeeManagementSystem.Controllers
             if (ModelState.IsValid)
             {
                 int vacancyId = _jobVacancyLogic.CreateJobvacancy(model);
-                return RedirectToAction("VacabcyDetails", "Home", new { id = vacancyId });
+                return RedirectToAction("Index");
             }
             return View();
         }

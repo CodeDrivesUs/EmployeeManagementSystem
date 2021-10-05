@@ -1,6 +1,7 @@
 ﻿using EmployeeManagementSystem.Business.SharedModels;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace EmployeeManagementSystem.Business.Logic.EmailLogic.Template
         #region Private
         private string CreateCallBackUrl()
         {
-            return $"/Landlord/myflats";
+            return $"{ConfigurationManager.AppSettings["BaseUrl"]}Home/JobVacabcyDetails/?Id={_jobVacancy.Id}";
         }
         #endregion
     }

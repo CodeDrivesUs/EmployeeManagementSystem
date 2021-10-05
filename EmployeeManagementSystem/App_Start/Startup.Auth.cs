@@ -75,6 +75,13 @@ namespace EmployeeManagementSystem
                 role.Name = "Admin";
                 roleManager.Create(role);
             }
+            
+            if (!roleManager.RoleExists("Hr"))
+            {
+                role = new IdentityRole();
+                role.Name = "Hr";
+                roleManager.Create(role);
+            }
 
         }
         public void CreateUser()
@@ -92,7 +99,23 @@ namespace EmployeeManagementSystem
                 userManager.AddToRole(user.Id, "Admin");
 
             }
+        }
+        
+        public void CreateUsehr()
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+            var user = new ApplicationUser();
 
+            user.UserName = "hr@Management.com";
+            user.Email = "hr@Management.com";
+
+            var check = userManager.Create(user, "Password@12");
+
+            if (check.Succeeded)
+            {
+                userManager.AddToRole(user.Id, "hr");
+
+            }
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model EmployeeManagementSystem.Business.SharedModels.JobApplicationModel
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Shared/_HrLayout.cshtml";
     var base64 = Convert.ToBase64String(Model.Cv);
     var Cvsrc = string.Format("data:application/pdf;base64,{0}", base64);
 }

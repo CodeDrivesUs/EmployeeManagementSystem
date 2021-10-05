@@ -1,15 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "ViewSalary";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_HrLayout.cshtml";
 }
-@model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.JobApplicationModel>
+
+@model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.JobVacancyModel>
 <div class="row">
     <div class="col-lg-12">
         <div id="panel-4" class="panel">
             <div class="panel-hdr">
                 <h2>
-                    Job Applications <span class="fw-300"><i>Records</i></span>
+                    Job Vacancy <span class="fw-300"><i>Records</i></span>
                 </h2>
             </div>
             <div class="panel-container show">
@@ -19,14 +20,13 @@
                         <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
                             <thead class="bg-warning-200">
                                 <tr>
-                                    <th>Action</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>CellPhone</th>
-                                    <th>Applied On</th>
+                                   
+                                    <th>Tittle</th>
+                                    <th>ExpiryDate</th>
+                                    <th>Date Created</th>
+                                   
                                     <th></th>
-                                    
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,19 +36,12 @@
                         {
                             <tr>
 
-                                <td>
-                                    <a class="btn btn-danger btn-sm" href="/JobVacancy/JobApplication/?Id=@item.Id">
-
-                                        <i class="fal fa-eye"></i>View
-                                    </a>
-                                </td>
-                                <td>@item.FirstName</td>
-                                <td>@item.LastName</td>
-                                <td>@item.Email</td>
-                                <td>@item.Cellphone</td>
                                
-                                <td>@item.AppliedOn</td>
-                                <td>@item.AppliedOn</td>
+                                <td>@item.Tittle</td>
+                                <td>@item.ExpiryDate.ToLongDateString()</td>
+                               
+                                <td>@item.CreationDate.ToLongDateString()</td>
+                                <td>@item.CreationDate</td>
 
                             </tr>
                         }
@@ -64,4 +57,6 @@
         </div>
     </div>
 </div>
+
+
 

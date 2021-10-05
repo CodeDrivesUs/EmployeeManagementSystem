@@ -13,6 +13,7 @@ namespace EmployeeManagementSystem
             ConfigureAuth(app);
             CreateRole();
             CreateUser();
+            CreateUsehr();
         }
     }
 }
