@@ -40,14 +40,12 @@ namespace EmployeeManagementSystem.Controllers
                 return RedirectToAction("Dashboard", "Employee");
 
             }
-            return View();
+            return View(_jobVacancyLogic.Initalize());
         }
 
-        public ActionResult About()
+        public ActionResult Success()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            return View("About");
         }
 
         public ActionResult VacabcyDetails(int? id)
@@ -91,7 +89,7 @@ namespace EmployeeManagementSystem.Controllers
                     jobApplicationModel.Cv = Myfile;
                   _jobApplicationLogic.CreateJobApplication(jobApplicationModel);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Success");
                 }
             }
             return View();

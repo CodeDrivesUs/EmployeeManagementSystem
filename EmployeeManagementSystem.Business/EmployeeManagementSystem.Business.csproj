@@ -104,6 +104,8 @@
     <Compile Include="SharedModels\DepartmentModel.cs" />
     <Compile Include="SharedModels\DevisionModel.cs" />
     <Compile Include="SharedModels\EmployeeModel.cs" />
+    <Compile Include="SharedModels\Home\HomeIndex.cs" />
+    <Compile Include="SharedModels\Home\ListDepartment.cs" />
     <Compile Include="SharedModels\InterviewModel.cs" />
     <Compile Include="SharedModels\JobApplicationModel.cs" />
     <Compile Include="SharedModels\JobVacancyModel.cs" />

@@ -54,6 +54,11 @@ namespace EmployeeManagementSystem.Controllers
         {
             return View(_jobApplicationLogic.GetAllActiveApplications());
         }
+        
+        public ActionResult Interviews()
+        {
+            return View(_jobApplicationLogic.GetAllInterInterviewViews());
+        }
 
         public ActionResult JobApplication(int? Id)
         {

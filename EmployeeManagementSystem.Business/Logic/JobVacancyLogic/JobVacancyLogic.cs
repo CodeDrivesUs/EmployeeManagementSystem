@@ -10,8 +10,10 @@ using EmployeeManagementSystem.Business.AutoMapper;
 using EmployeeManagementSystem.Business.Logic.EmailLogic.Template;
 using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
 using EmployeeManagementSystem.Business.Logic.DevisionLogic;
+using EmployeeManagementSystem.Business.Logic.DepartmentLogic;
 using EmployeeManagementSystem.Business.Enums;
 using EmployeeManagementSystem.Business.SharedModels.JobVacancy;
+using EmployeeManagementSystem.Business.SharedModels.Home;
 
 namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
 {
@@ -20,12 +22,14 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
         private readonly EmployeeManagementDbContext _employeeManagementDbContext;
         private readonly IEmployeeLogic _employeeLogic;
         private readonly IDevisionLogic _devisionLogic;
+        private readonly IDepartmentLogic _departmentLogic;
 
         public JobVacancyLogic()
         {
             _devisionLogic = new DevisionLogic.DevisionLogic();
             _employeeManagementDbContext = new EmployeeManagementDbContext();
             _employeeLogic = new EmployeeLogic.EmployeeLogic();
+            _departmentLogic = new DepartmentLogic.DepartmentLogic();
         }
 
         public int CreateJobvacancy(JobVacancyModel model)
@@ -78,6 +82,16 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
         public JobVacancyModel GetJobVacancyById(int Id)
         {
             return ObjectMapper.Mapper.Map<JobVacancyModel>(_employeeManagementDbContext.jobVacancies.Find(Id));
+        }
+
+        public HomeIndex Initalize()
+        {
+            var result = new List<ListDepartment>();
+            foreach(var item in _departmentLogic.GetAllDepartments())
+            {
+                result.Add(new ListDepartment { department = item, Number = GetJobVacancyByDepartmentId(item.Id).Count });
+            }
+            return new HomeIndex { listDepartments=result };
         }
 
     }

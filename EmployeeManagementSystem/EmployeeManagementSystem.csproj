@@ -729,6 +729,7 @@
     <Content Include="Views\Shared\_HrLayout.cshtml" />
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\JobVacancy\Index.cshtml" />
+    <Content Include="Views\JobVacancy\Interviews.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,7 +22,7 @@ namespace EmployeeManagementSystem.Business.Logic.EmailLogic.Template
             body = body.Replace("{#Greeting}", $"Dear {_jobApplication.FirstName}");
             return body.Replace("{#Body}", $"Thank you for your job application for: <strong>{_jobApplication.VacancyTittle}</strong>.  " +
                 $"Unfortunately, you have been unsuccessful in your application, but we will keep your CV in our database and we will notify you when new positions that meet" +
-                $"your experience become available.");
+                $" your experience become available.");
         }
     }
 }

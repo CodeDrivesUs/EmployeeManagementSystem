@@ -81,6 +81,16 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
         {
             return ObjectMapper.Mapper.Map<InterviewModel>(_employeeManagementDbContext.interviews.Find(Id));
         }
+        
+        public List<InterviewModel> GetAllInterInterviewViews()
+        {
+            var list = ObjectMapper.Mapper.Map<List<InterviewModel>>(_employeeManagementDbContext.interviews.ToList());
+            foreach(var item in list)
+            {
+                item.JobApplication = GetJobApplication(item.JobApplicationId);
+            }
+            return list;
+        }
 
         public void SetInterviwerPeerId(string peerId, int Id)
         {

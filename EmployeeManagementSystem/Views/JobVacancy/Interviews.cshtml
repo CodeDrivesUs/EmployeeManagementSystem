@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Interviews";
+    Layout = "~/Views/Shared/_HrLayout.cshtml";
+}
+@model  IEnumerable<EmployeeManagementSystem.Business.SharedModels.InterviewModel>
+<div class="row">
+    <div class="col-lg-12">
+        <div id="panel-4" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Job InterViews <span class="fw-300"><i>Records</i></span>
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+
+                    <HeaderTemplate>
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>Action</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>CellPhone</th>
+                                    <th>Start Date</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    <a class="btn btn-danger btn-sm" href="/Room/Index/?Interview=@item.Id">
+
+                                        <i class="fal fa-eye"></i>Join Interview
+                                    </a>
+                                </td>
+                                <td>@item.JobApplication.FirstName</td>
+                                <td>@item.JobApplication.LastName</td>
+                                <td>@item.JobApplication.Email</td>
+                                <td>@item.JobApplication.Cellphone</td>
+
+                                <td>@item.Date.ToShortDateString() @item.start.ToShortTimeString()</td>
+                                <td>@item.Date</td>
+
+                            </tr>
+                        }
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
+                        </table>
+                    </FooterTemplate>
+
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

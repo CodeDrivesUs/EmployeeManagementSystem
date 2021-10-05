@@ -17,12 +17,14 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
         private readonly EmployeeManagementDbContext _employeeManagementDbContext;
         private readonly IEmployeeLogic _employeeLogic;
         private readonly IDevisionLogic _devisionLogic;
+
         public SalaryLogic()
         {
             _devisionLogic = new DevisionLogic.DevisionLogic();
             _employeeLogic = new EmployeeLogic.EmployeeLogic();
             _employeeManagementDbContext = new EmployeeManagementDbContext();
         }
+
         public void CreateSalary(SalaryModel model)
         {
             model.CreatedOn = DateTime.Now;
@@ -37,6 +39,7 @@ namespace EmployeeManagementSystem.Business.Logic.SalaryLogic
             _employeeManagementDbContext.salaries.Add(ObjectMapper.Mapper.Map<Salary>(model));
             _employeeManagementDbContext.SaveChanges();
         }
+
         public List<SalaryModel> GetAllSalaries()
         {
             var _list = ObjectMapper.Mapper.Map<List<SalaryModel>>(_employeeManagementDbContext.salaries.ToList());

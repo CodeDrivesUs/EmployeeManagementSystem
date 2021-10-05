@@ -1,4 +1,5 @@
 ﻿using EmployeeManagementSystem.Business.SharedModels;
+using EmployeeManagementSystem.Business.SharedModels.Home;
 using EmployeeManagementSystem.Business.SharedModels.JobVacancy;
 using System;
 using System.Collections.Generic;
@@ -16,5 +17,6 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
         List<JobVacancyModel> GetJobVacancyByDivisionId(int Id);
         List<JobVacancyByDivision> JobVacancyByDivisionsByDepartmentId(int Id);
         List<JobVacancyModel> GetAllJobVacancies();
+        HomeIndex Initalize();
     }
 }

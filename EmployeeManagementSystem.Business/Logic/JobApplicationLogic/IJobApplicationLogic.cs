@@ -16,5 +16,6 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
         void CreateInterview(InterviewModel model);
         void SetInterviwerPeerId(string peerId, int Id);
         InterviewModel GetInterInterview(int Id);
+        List<InterviewModel> GetAllInterInterviewViews();
     }
 }
