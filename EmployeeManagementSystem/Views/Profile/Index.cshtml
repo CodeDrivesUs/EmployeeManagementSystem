@@ -1,0 +1,91 @@
+﻿@model EmployeeManagementSystem.Business.SharedModels.Home.MyProfile
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HrLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    My Profile
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <form method="post" action="Profile/UpdateProfile">
+                    <input type="hidden" name="Id" value="@Model.profile.Id" />
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label>First Name</label>
+                                    <input type="text" name="FirstName" value="@Model.profile.FirstName" class="form-control"  />
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <label>Employeee Name</label>
+                                    <input type="text" name="LastName" value="@Model.profile.LastName" class="form-control"  />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="validationDefault01">Phone Number</label>
+                                    <input type="text" name="PhoneNumber" value="@Model.profile.PhoneNumber" class="form-control"  />
+                                </div>
+                               
+                            </div>
+                          
+                        </div>
+                        <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                            <input type="submit" value="Update" class="btn btn-default ml-auto" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    My CVs
+                </h2>
+                <div class="panel-toolbar">
+                    <button> Add New CV</button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <form method="post">
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            <ul>
+                                @if (Model.resumes.Count != 0)
+                                {
+                                    foreach(var cv in Model.resumes)
+                                    {
+                                        <li><p> <span> Date:@cv.date</span></p></li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="text-danger"><p>No CV's Uploaded yet </p></li>
+                                }
+                            </ul>
+                          
+                        </div>
+                       
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

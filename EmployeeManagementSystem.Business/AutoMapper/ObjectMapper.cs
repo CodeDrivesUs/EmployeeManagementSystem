@@ -24,6 +24,8 @@ namespace EmployeeManagementSystem.Business.AutoMapper
                 cfg.CreateMap<TimeSheet, TimeSheetModel>().ReverseMap();
                 cfg.CreateMap<JobApplication, JobApplicationModel>().ReverseMap();
                 cfg.CreateMap<Interview, InterviewModel>().ReverseMap();
+                cfg.CreateMap<ApplicantProfile, ApplicantProfileModel>().ReverseMap();
+                cfg.CreateMap<Resume, ResumeModel>().ReverseMap();
             });
             var mapper = config.CreateMapper();
             return mapper;

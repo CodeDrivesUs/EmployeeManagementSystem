@@ -174,6 +174,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobVacancyController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RoomController.cs" />
     <Compile Include="Controllers\TimeSheetController.cs" />
     <Compile Include="Global.asax.cs">
@@ -730,6 +731,8 @@
     <Content Include="Views\Home\View.cshtml" />
     <Content Include="Views\JobVacancy\Index.cshtml" />
     <Content Include="Views\JobVacancy\Interviews.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_ApplicantLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

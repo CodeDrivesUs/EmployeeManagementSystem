@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\ApplicantProfile.cs" />
     <Compile Include="DataModels\Attachment.cs" />
     <Compile Include="DataModels\Department.cs" />
     <Compile Include="DataModels\Devision.cs" />
@@ -62,15 +63,25 @@
     <Compile Include="DataModels\JobVacancy.cs" />
     <Compile Include="DataModels\Leave.cs" />
     <Compile Include="DataModels\PrimaryKey.cs" />
+    <Compile Include="DataModels\Resume.cs" />
     <Compile Include="DataModels\Salary.cs" />
     <Compile Include="DataModels\TimeSheet.cs" />
     <Compile Include="DbContext\EmployeeManagementDbContext.cs" />
+    <Compile Include="Migrations\202111061300528_latest.cs" />
+    <Compile Include="Migrations\202111061300528_latest.designer.cs">
+      <DependentUpon>202111061300528_latest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202111061300528_latest.resx">
+      <DependentUpon>202111061300528_latest.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

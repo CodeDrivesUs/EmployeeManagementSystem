@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EmployeeManagementSystem.Models;
 using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
+using EmployeeManagementSystem.Business.Logic.ProfileLogic;
 
 namespace EmployeeManagementSystem.Controllers
 {
@@ -19,10 +20,12 @@ namespace EmployeeManagementSystem.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private readonly IEmployeeLogic _employeeLogic;
+        private readonly IProfileLogic _profileLogic;
 
         public AccountController()
         {
             _employeeLogic = new EmployeeLogic();
+            _profileLogic = new ProfileLogic();
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -154,23 +157,20 @@ namespace EmployeeManagementSystem.Controllers
         {
             if (ModelState.IsValid)
             {
-                var employee = _employeeLogic.GetEmployeesByEmail(model.Email);
-                if(employee == null)
-                {
-                    return View("InvalidUser");
-                }
+               
+              
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    _profileLogic.CreatProfile(user.Id);
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);

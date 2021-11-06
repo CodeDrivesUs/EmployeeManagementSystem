@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using EmployeeManagementSystem.Business.Logic.JobVacancyLogic;
 using EmployeeManagementSystem.Business.Logic.DepartmentLogic;
 using EmployeeManagementSystem.Business.Logic.JobApplicationLogic;
+using EmployeeManagementSystem.Business.Logic.EmployeeLogic;
 using EmployeeManagementSystem.Business.SharedModels;
 
 namespace EmployeeManagementSystem.Controllers
@@ -16,16 +17,20 @@ namespace EmployeeManagementSystem.Controllers
         private readonly IJobVacancyLogic _jobVacancyLogic;
         private readonly IDepartmentLogic _departmentLogic;
         private readonly IJobApplicationLogic _jobApplicationLogic;
+        private readonly IEmployeeLogic _employeeLogic;
 
         public HomeController()
         {
             _jobApplicationLogic = new JobApplicationLogic();
             _departmentLogic = new DepartmentLogic();
             _jobVacancyLogic = new JobVacancyLogic();
+            _employeeLogic = new EmployeeLogic();
         }
 
         public ActionResult Index()
         {
+            var employee = _employeeLogic.GetEmployeesByEmail(User.Identity.Name.ToString());
+
             if (User.IsInRole("Admin"))
             {
                 return RedirectToAction("Dashboard","Admin");
@@ -35,10 +40,13 @@ namespace EmployeeManagementSystem.Controllers
             {
                 return View("view");
             }
+            if (employee == null)
+            {
+                return RedirectToAction("Index", "Profile");
+            }
             if (Request.IsAuthenticated)
             {
                 return RedirectToAction("Dashboard", "Employee");
-
             }
             return View(_jobVacancyLogic.Initalize());
         }

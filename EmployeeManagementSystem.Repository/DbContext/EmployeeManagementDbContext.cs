@@ -22,6 +22,8 @@ namespace EmployeeManagementSystem.Repository.DbContext
         public DbSet<Attachment> attachments    { get; set; }
         public DbSet<TimeSheet>  timeSheets  { get; set; }
         public DbSet<Interview>  interviews   { get; set; }
+        public DbSet<ApplicantProfile> applicantProfiles    { get; set; }
+        public DbSet<Resume>  resumes { get; set; }
 
     }
 
