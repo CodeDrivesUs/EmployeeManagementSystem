@@ -24,6 +24,8 @@ namespace EmployeeManagementSystem.Repository.DbContext
         public DbSet<Interview>  interviews   { get; set; }
         public DbSet<ApplicantProfile> applicantProfiles    { get; set; }
         public DbSet<Resume>  resumes { get; set; }
+        public DbSet<ApplicationContract>  applicationContracts { get; set; }
+        public DbSet<Contract>  contracts { get; set; }
 
     }
 

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.Business.Logic.JobVacancyLogic;
+using System.Data.Entity;
 
 namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
 {
@@ -40,6 +41,11 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
         public List<JobApplicationModel> GetAllActiveApplications()
         {
             return ObjectMapper.Mapper.Map<List<JobApplicationModel>>(_employeeManagementDbContext.jobApplications.Where(x=>x.StatusId== (int)JobApplicationStatusEnums.Submitted).ToList());
+        }
+        
+        public List<JobApplicationModel> GetAllCompletedApplications()
+        {
+            return ObjectMapper.Mapper.Map<List<JobApplicationModel>>(_employeeManagementDbContext.jobApplications.Where(x=>x.StatusId== (int)JobApplicationStatusEnums.AwaitingProcess).ToList());
         }
 
         public void RejectJobApplication(int Id)
@@ -92,6 +98,15 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
             return list;
         }
 
+        public void UploadTestResults(JobApplicationModel model)
+        {
+            var application = _employeeManagementDbContext.jobApplications.Find(model.Id);
+            application.TestResponse = model.TestResponse;
+            application.StatusId = (int)JobApplicationStatusEnums.AwaitingProcess;
+            _employeeManagementDbContext.Entry(application).State = EntityState.Modified;
+            _employeeManagementDbContext.SaveChanges();
+        }
+
         public void SetInterviwerPeerId(string peerId, int Id)
         {
             var interview = _employeeManagementDbContext.interviews.Find(Id);
@@ -99,5 +114,22 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
             _employeeManagementDbContext.SaveChanges();
         }
 
+        public void InterviewSuccess(int Id, string Comment)
+        {
+            var interview = _employeeManagementDbContext.interviews.Find(Id);
+            interview.Comment = Comment;
+            interview.statusId = (int)InterviewOutComeEnums.Success;
+            _employeeManagementDbContext.SaveChanges();
         }
+        
+        public void InterviewNotSuccess(int Id, string Comment)
+        {
+            var interview = _employeeManagementDbContext.interviews.Find(Id);
+            interview.Comment = Comment;
+            interview.statusId = (int)InterviewOutComeEnums.NotSuccess;
+            _employeeManagementDbContext.SaveChanges();
+            RejectJobApplication(interview.JobApplicationId);
+        }
+
+    }
 }

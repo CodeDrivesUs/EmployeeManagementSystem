@@ -1,7 +1,7 @@
 ﻿@model EmployeeManagementSystem.Business.SharedModels.Home.MyProfile
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_HrLayout.cshtml";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
 }
 
 
@@ -19,28 +19,28 @@
                 </div>
             </div>
             <div class="panel-container show">
-                <form method="post" action="Profile/UpdateProfile">
+                <form method="post" action="/Profile/UpdateProfile">
                     <input type="hidden" name="Id" value="@Model.profile.Id" />
                     <div class="panel-content p-0">
                         <div class="panel-content">
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label>First Name</label>
-                                    <input type="text" name="FirstName" value="@Model.profile.FirstName" class="form-control"  />
+                                    <input type="text" name="FirstName" value="@Model.profile.FirstName" class="form-control" />
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label>Employeee Name</label>
-                                    <input type="text" name="LastName" value="@Model.profile.LastName" class="form-control"  />
+                                    <input type="text" name="LastName" value="@Model.profile.LastName" class="form-control" />
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label" for="validationDefault01">Phone Number</label>
-                                    <input type="text" name="PhoneNumber" value="@Model.profile.PhoneNumber" class="form-control"  />
+                                    <input type="text" name="PhoneNumber" value="@Model.profile.PhoneNumber" class="form-control" />
                                 </div>
-                               
+
                             </div>
-                          
+
                         </div>
                         <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
                             <input type="submit" value="Update" class="btn btn-default ml-auto" />
@@ -59,7 +59,7 @@
                     My CVs
                 </h2>
                 <div class="panel-toolbar">
-                    <button> Add New CV</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Add New CV</button>
                 </div>
             </div>
             <div class="panel-container show">
@@ -69,9 +69,14 @@
                             <ul>
                                 @if (Model.resumes.Count != 0)
                                 {
-                                    foreach(var cv in Model.resumes)
+                                    foreach (var cv in Model.resumes)
                                     {
-                                        <li><p> <span> Date:@cv.date</span></p></li>
+                                <li>
+                                    <i class="fal fa-file-pdf"></i><span> <a href="#" onclick="viewpdf('@cv.Id')">  @cv.FileName</a></span> <span> - Date:@cv.date.ToShortDateString()</span>
+                                    <a class="btn btn-danger btn-sm" href="/Profile/DeleteResume?Id=@cv.Id">
+                                        <i class="fal fa-trash"></i>Delete
+                                    </a>
+                                </li>
                                     }
                                 }
                                 else
@@ -79,9 +84,9 @@
                                     <li class="text-danger"><p>No CV's Uploaded yet </p></li>
                                 }
                             </ul>
-                          
+
                         </div>
-                       
+
                     </div>
                 </form>
             </div>
@@ -89,3 +94,42 @@
     </div>
 </div>
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form method="post" action="/Profile/addCV" enctype="multipart/form-data">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Job Application</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel-content p-0">
+                        <div class="panel-content">
+                            <input type="hidden" name="ProfileId" value="@Model.profile.Id" />
+                            <div class="form-group">
+                                <label class="form-label">
+                                    CV
+                                </label>
+                                <input type="file" name="upload" accept="application/pdf" class="from-control" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var viewpdf = function (base64EncodedPDF) {
+        window.open("/Profile/ViewmyCv/?Id=" + escape(base64EncodedPDF));
+    };
+</script>

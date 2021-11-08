@@ -41,6 +41,13 @@
 
                                         <i class="fal fa-eye"></i>Join Interview
                                     </a>
+                                    @if (!string.IsNullOrEmpty(item.InterviewrPeerId))
+                                    {
+                                    <a class="btn btn-primary btn-sm" href="/JobVacancy/Interview/?Interview=@item.Id">
+
+                                        <i class="fal fa-pencil"></i>Proccess
+                                    </a>
+                                    }
                                 </td>
                                 <td>@item.JobApplication.FirstName</td>
                                 <td>@item.JobApplication.LastName</td>

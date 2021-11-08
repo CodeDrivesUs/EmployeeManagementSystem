@@ -8,6 +8,6 @@ namespace EmployeeManagementSystem.Business.Enums
 {
     public enum JobApplicationStatusEnums
     {
-        Submitted,AwaitingInterView,Rejected
+        Submitted,AwaitingInterView,Rejected,AwaitingProcess
     }
 }

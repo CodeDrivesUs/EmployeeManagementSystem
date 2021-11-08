@@ -1,0 +1,101 @@
+﻿@model EmployeeManagementSystem.Business.SharedModels.JobVacancyModel
+@{
+    ViewBag.Title = "JobVacancyDetails";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+    <div class="container">
+        <h2 class="text-center text-primary">@Model.Tittle</h2>
+        <div class="panel panel-default container" style="margin-top:40px;">
+            <div class="panel-heading">
+                <h2 class="text-center"><strong></strong></h2>
+                <span class="pull-left">Expiry Date:<span class="text-danger">@Model.ExpiryDate.ToLongDateString()</span></span>
+            </div>
+            <div class="panel-body">
+                <div>
+                    @Html.Raw(System.Web.HttpUtility.HtmlDecode(Model.Description))
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Apply Now
+                </button>
+
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="post" action="/Profile/CreatJobApplication" enctype="multipart/form-data">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Job Application</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="panel-content p-0">
+                                <div class="panel-content">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="VacancyId" value="@Model.Id" />
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            First Name
+                                        </label>
+                                        <input type="text" name="FirstName" required readonly value="@Model.Profile.profile.FirstName" class="from-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            Last Name
+                                        </label>
+                                        <input type="text" name="LastName" required readonly value="@Model.Profile.profile.LastName" class="from-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            Email
+                                        </label>
+                                        <input type="email" required name="Email" value="@User.Identity.Name.ToString()" readonly class="from-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            CellPhone
+                                        </label>
+                                        <input type="tel" required name="CellPhone" readonly value="@Model.Profile.profile.PhoneNumber" class="from-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            IdNumber
+                                        </label>
+                                        <input type="text" required name="IdNumber" class="from-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">
+                                            CV
+                                        </label>
+                                        <ul>
+
+                                            @foreach (var item in Model.Profile.resumes)
+                                            {
+                                            <li>
+
+                                                <input type="radio" name="CvId" value="@item.Id" /> @item.FileName
+                                            </li>
+                                            }
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+

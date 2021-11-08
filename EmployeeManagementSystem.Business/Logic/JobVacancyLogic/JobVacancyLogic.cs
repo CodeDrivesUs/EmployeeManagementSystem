@@ -32,6 +32,7 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
             _departmentLogic = new DepartmentLogic.DepartmentLogic();
         }
 
+
         public int CreateJobvacancy(JobVacancyModel model)
         {
             model.CreationDate = DateTime.Now;
@@ -92,6 +93,10 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
                 result.Add(new ListDepartment { department = item, Number = GetJobVacancyByDepartmentId(item.Id).Count });
             }
             return new HomeIndex { listDepartments=result };
+        }
+        public List<JobVacancyModel> SearchJobVacancy(string keyWord)
+        {
+            return ObjectMapper.Mapper.Map<List<JobVacancyModel>>(_employeeManagementDbContext.jobVacancies.Where(x => x.Tittle.Contains(keyWord)).ToList());
         }
 
     }

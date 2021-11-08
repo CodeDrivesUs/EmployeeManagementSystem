@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataModels\ApplicantProfile.cs" />
+    <Compile Include="DataModels\ApplicationContract.cs" />
     <Compile Include="DataModels\Attachment.cs" />
+    <Compile Include="DataModels\Contract.cs" />
     <Compile Include="DataModels\Department.cs" />
     <Compile Include="DataModels\Devision.cs" />
     <Compile Include="DataModels\Employee.cs" />
@@ -71,6 +73,22 @@
     <Compile Include="Migrations\202111061300528_latest.designer.cs">
       <DependentUpon>202111061300528_latest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111061814314_zweli.cs" />
+    <Compile Include="Migrations\202111061814314_zweli.designer.cs">
+      <DependentUpon>202111061814314_zweli.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111071236086_sdfleh.cs" />
+    <Compile Include="Migrations\202111071236086_sdfleh.designer.cs">
+      <DependentUpon>202111071236086_sdfleh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111071756153_sdflehfg.cs" />
+    <Compile Include="Migrations\202111071756153_sdflehfg.designer.cs">
+      <DependentUpon>202111071756153_sdflehfg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202111071921144_contract.cs" />
+    <Compile Include="Migrations\202111071921144_contract.designer.cs">
+      <DependentUpon>202111071921144_contract.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +99,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202111061300528_latest.resx">
       <DependentUpon>202111061300528_latest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111061814314_zweli.resx">
+      <DependentUpon>202111061814314_zweli.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111071236086_sdfleh.resx">
+      <DependentUpon>202111071236086_sdfleh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111071756153_sdflehfg.resx">
+      <DependentUpon>202111071756153_sdflehfg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111071921144_contract.resx">
+      <DependentUpon>202111071921144_contract.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

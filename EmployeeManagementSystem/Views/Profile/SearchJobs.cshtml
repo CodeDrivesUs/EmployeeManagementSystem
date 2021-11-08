@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "SearchJobs";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+@model EmployeeManagementSystem.Business.SharedModels.Home.HomeIndex
+<h2 class="text-center">Job Search</h2>
+
+<section class="banner-bottom-wthree py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3ls py-lg-5  py-3">
+            <form method="post" action="/Profile/Search">
+                <div class="row">
+
+                    <div class="col-10">
+                        <input type="text" class="form-control col-md-12" placeholder="Search here ......." name="search" />
+                    </div>
+                    <div><button type="submit" class="btn btn-primary"><i class="fal fa-search">Search</i></button></div>
+
+                </div>
+            </form>
+            @if (!string.IsNullOrEmpty(Model.searchtext))
+            {
+                <h2>Showing Search Results for "@Model.searchtext"</h2>
+                if (Model.SearchedJobs.Count == 0)
+                {
+                    <h2 class="text-danger">No Job Vacancies Found.. </h2>
+                }
+                else
+                {
+                    <div>
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <HeaderTemplate>
+                                <thead class="bg-warning-200">
+                                    <tr>
+                                        <th>Action</th>
+                                        <th>Tittle</th>
+                                        <th>Closing Date</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                                <tbody>
+                                    @foreach (var item in Model.SearchedJobs)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a class="btn btn-danger btn-sm" href="/Profile/JobVacancyDetails?Id=@item.Id">
+
+                                                    <i class="fal fa-info-circle"></i>View
+                                                </a>
+                                            </td>
+                                            <td>@item.Tittle</td>
+                                            <td>@item.ExpiryDate.ToShortDateString()</td>
+                                            <td>@item.Tittle</td>
+                                        </tr>
+                                    }
+                                </tbody>
+
+                            </ItemTemplate>
+                            <FooterTemplate>
+                            </FooterTemplate>
+                        </table>
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+<section class="banner-bottom-wthree py-lg-5 py-md-5 py-3">
+    <div class="container">
+        <div class="inner-sec-w3ls py-lg-5  py-3">
+            <h3 class="tittle text-center mb-lg-4 mb-3">
+                <span>Our Mission</span>Popular Categories
+            </h3>
+            <div class="row populor_category_grids mt-5">
+                @foreach (var item in Model.listDepartments)
+                {
+                    <div class="col-md-3 category_grid">
+                        <div class="view view-tenth">
+                            <div class="category_text_box">
+                                <i class="fas fa-bullhorn"></i>
+                                <h3> @item.department.DepartmentName</h3>
+                                <p>(@item.Number open positions)</p>
+                            </div>
+                            <div class="mask">
+                                <a href="/Home/VacabcyForDepartment?Id=@item.department.Id">
+                                    <img src="~/images/p1.jpg" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+
+        </div>
+    </div>
+</section>
+

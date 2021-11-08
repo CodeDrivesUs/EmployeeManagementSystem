@@ -16,5 +16,8 @@ namespace EmployeeManagementSystem.Business.SharedModels
         public DateTime DateCreated { get; set; }
         public string InterviewrPeerId { get; set; }
         public JobApplicationModel JobApplication { get; set; }
+        public List<ContractModel> ListContract { get; set; }
+        public string Comment { get; set; }
+        public int statusId { get; set; }
     }
 }

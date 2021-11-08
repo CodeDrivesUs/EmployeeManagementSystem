@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>
-        @ViewBag.Title Employee Management System - Admin Panel
+        @ViewBag.Title Employee Management System - Applicant Panel
     </title>
     <meta name="description" content="Marketing Dashboard">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +25,7 @@
 
 </head>
 <body class="mod-bg-1 mod-nav-link ">
+
     <script>
         /**
             *	This script should be placed right after the body tag for fast execution
@@ -78,6 +79,7 @@
 
     </script>
     <div id="form1">
+        @using Microsoft.AspNet.Identity
         <div>
             <div class="page-wrapper">
                 <div class="page-inner">
@@ -85,7 +87,7 @@
                     <aside class="page-sidebar">
                         <div class="page-logo">
                             <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative" data-toggle="modal" data-target="#modal-shortcut">
-                                <span class="page-logo-text mr-1">Admin Panel</span>
+                                <span class="page-logo-text mr-1">Applicant Panel</span>
                             </a>
                         </div>
                         <!-- BEGIN PRIMARY NAVIGATION -->
@@ -98,7 +100,7 @@
                                            Applicant
                                         </span>
                                     </a>
-                                    <span class="d-inline-block text-truncate text-truncate-sm">HR.EmployeeManagemantSystem.com</span>
+                                    <span class="d-inline-block text-truncate text-truncate-sm">@User.Identity.Name.ToString() </span>
                                 </div>
                                 <img src="~/Content/Admin/img/card-backgrounds/cover-2-lg.png" class="cover" alt="cover">
                             </div>
@@ -113,6 +115,18 @@
                                     <a href="/Profile/Index">
                                         <i class="fal fa-user"></i>
                                         <span class="nav-link-text" data-i18n="nav.application_intel">My Profile</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/Profile/SearchJobs">
+                                        <i class="fal fa-search"></i>
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Job Search</span>
+                                    </a>
+                                </li>
+                                 <li>
+                                    <a href="/Profile/AwaitingAssessment">
+                                        <i class="fal fa-search"></i>
+                                        <span class="nav-link-text" data-i18n="nav.application_intel">Jobs Awaitng Assessment</span>
                                     </a>
                                 </li>
  

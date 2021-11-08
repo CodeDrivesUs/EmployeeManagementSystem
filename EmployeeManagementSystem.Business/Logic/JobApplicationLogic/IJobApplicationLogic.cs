@@ -17,5 +17,9 @@ namespace EmployeeManagementSystem.Business.Logic.JobApplicationLogic
         void SetInterviwerPeerId(string peerId, int Id);
         InterviewModel GetInterInterview(int Id);
         List<InterviewModel> GetAllInterInterviewViews();
+        List<JobApplicationModel> GetAllCompletedApplications();
+        void UploadTestResults(JobApplicationModel model);
+        void InterviewNotSuccess(int Id, string Comment);
+        void InterviewSuccess(int Id, string Comment);
     }
 }

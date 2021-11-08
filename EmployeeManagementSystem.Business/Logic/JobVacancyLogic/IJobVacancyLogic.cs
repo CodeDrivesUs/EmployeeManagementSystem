@@ -18,5 +18,6 @@ namespace EmployeeManagementSystem.Business.Logic.JobVacancyLogic
         List<JobVacancyByDivision> JobVacancyByDivisionsByDepartmentId(int Id);
         List<JobVacancyModel> GetAllJobVacancies();
         HomeIndex Initalize();
+        List<JobVacancyModel> SearchJobVacancy(string keyWord);
     }
 }

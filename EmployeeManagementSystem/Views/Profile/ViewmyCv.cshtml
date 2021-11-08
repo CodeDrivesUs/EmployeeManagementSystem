@@ -1,0 +1,28 @@
+﻿
+@model EmployeeManagementSystem.Business.SharedModels.ResumeModel
+@{
+    Layout = null;
+    var base64 = Convert.ToBase64String(Model.CV);
+    var Cvsrc = string.Format("data:application/pdf;base64,{0}", base64);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title> @Model.FileName</title>
+    <style>
+
+        .mypdf {
+            height: 920px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <embed src="@Cvsrc" class="mypdf" />
+    </div>
+</body>
+</html>

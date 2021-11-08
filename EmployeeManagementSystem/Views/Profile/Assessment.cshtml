@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Assessment";
+    Layout = "~/Views/Shared/_ApplicantLayout.cshtml";
+}
+
+
+@model EmployeeManagementSystem.Business.SharedModels.JobApplicationModel
+
+<div class="row">
+    <div class="col-lg-8">
+
+        <div class="panel panel-default container">
+            <div class="panel-heading">
+                <h2 class="text-center"><strong>@Model.JobVacancy.Tittle</strong></h2>
+                <span class="pull-left">Expiry Date:<span class="text-danger">@Model.JobVacancy.ExpiryDate.ToLongDateString()</span></span>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <h3 style="margin-top:30px;">Assessment</h3>
+                    <p> To take the assessment click <a href="#"  onclick="viewpdf('@Model.JobVacancy.TestUrl')">here</a></p>
+                    <p>When you have finished the assessment please upload your results in the  form  below.</p>
+                    <form method="Post" action="/Profile/UploadResults" enctype="multipart/form-data">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-row">
+                            <input type="file" name="results" class="form-control col-md-5" />
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-primary" >Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><strong class="text-center">Applicant Details</strong></h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li><strong>First Name :</strong>@Model.FirstName</li>
+                    <li><strong>Last Name :</strong>@Model.LastName</li>
+                    <li><strong>Cell Phone :</strong>@Model.Cellphone</li>
+                    <li><strong>Email :</strong>@Model.Email</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var viewpdf = function (base64EncodedPDF) {
+        window.open(base64EncodedPDF);
+    };
+</script>

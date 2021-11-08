@@ -12,6 +12,7 @@ namespace EmployeeManagementSystem.Repository.DataModels
         public int DevisionId { get; set; }
         public string Tittle { get; set; }
         public int Type { get; set; }
+        public string TestUrl { get; set; }
         public string Description { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime ExpiryDate { get; set; }

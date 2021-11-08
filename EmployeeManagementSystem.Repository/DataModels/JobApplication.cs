@@ -16,6 +16,7 @@ namespace EmployeeManagementSystem.Repository.DataModels
         public string Cellphone { get; set; }
         public string IdNumber { get; set; }
         public byte[] Cv { get; set; }
+        public byte[] TestResponse { get; set; }
         public DateTime AppliedOn { get; set; }
         public int StatusId { get; set; }
     }

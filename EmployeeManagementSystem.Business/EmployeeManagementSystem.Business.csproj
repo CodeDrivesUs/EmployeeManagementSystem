@@ -76,9 +76,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\ObjectMapper.cs" />
+    <Compile Include="Enums\ContractEnums.cs" />
+    <Compile Include="Enums\InterviewOutComeEnums.cs" />
     <Compile Include="Enums\JobApplicationStatusEnums.cs" />
     <Compile Include="Enums\JobVacancyTypeEnums.cs" />
     <Compile Include="Enums\LeavestatusEnum.cs" />
+    <Compile Include="Logic\ContractLogic\ContractLogic.cs" />
+    <Compile Include="Logic\ContractLogic\IContractLogic.cs" />
     <Compile Include="Logic\DepartmentLogic\DepartmentLogic.cs" />
     <Compile Include="Logic\DepartmentLogic\IDepartmentLogic.cs" />
     <Compile Include="Logic\DevisionLogic\DevisionLogic.cs" />
@@ -104,6 +108,8 @@
     <Compile Include="Logic\TimeSheetLogic\TimeSheetLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedModels\ApplicantProfileModel.cs" />
+    <Compile Include="SharedModels\ApplicationContractModel.cs" />
+    <Compile Include="SharedModels\ContractModel.cs" />
     <Compile Include="SharedModels\DepartmentModel.cs" />
     <Compile Include="SharedModels\DevisionModel.cs" />
     <Compile Include="SharedModels\EmployeeModel.cs" />

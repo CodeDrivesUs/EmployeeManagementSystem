@@ -15,5 +15,7 @@ namespace EmployeeManagementSystem.Repository.DataModels
         public Guid RoomId { get; set; }
         public DateTime DateCreated { get; set; }
         public string InterviewrPeerId { get; set; }
+        public string Comment { get; set; }
+        public int statusId { get; set; }
     }
 }

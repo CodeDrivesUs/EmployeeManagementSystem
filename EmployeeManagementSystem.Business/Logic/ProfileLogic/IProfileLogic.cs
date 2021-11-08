@@ -15,6 +15,7 @@ namespace EmployeeManagementSystem.Business.Logic.ProfileLogic
         void addResume(ResumeModel model);
         List<ResumeModel> GetResumesByProfileId(int Id);
         void removeResume(int Id);
+        ResumeModel GetResumebyId(int Id);
 
     }
 }

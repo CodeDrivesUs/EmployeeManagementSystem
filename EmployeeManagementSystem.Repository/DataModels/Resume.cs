@@ -9,6 +9,7 @@ namespace EmployeeManagementSystem.Repository.DataModels
     public class Resume:PrimaryKey
     {
         public int ProfileId { get; set; }
+        public string FileName { get; set; }
         public DateTime date { get; set; }
         public byte[] CV { get; set; }
     }

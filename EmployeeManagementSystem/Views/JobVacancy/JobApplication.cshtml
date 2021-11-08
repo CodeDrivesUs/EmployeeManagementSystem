@@ -37,6 +37,7 @@
             </div>
             <div class="panel-footer" style="color:white;">
                 <a class="btn btn-primary" onclick="viewpdf('@Model.Id')">View CV</a>
+                <a class="btn btn-primary" onclick="viewResult('@Model.Id')">View Results</a>
                 <a class="btn btn-success"  data-toggle="modal" data-target="#exampleModal">Schedule Interview</a>
                 <a class="btn btn-danger" href="/JobVacancy/Reject/?Id=@Model.Id" >Reject</a>
             </div>
@@ -93,5 +94,9 @@
 <script>
     var viewpdf = function (base64EncodedPDF) {
     window.open("/Jobvacancy/viewPDf/?Id=" + escape(base64EncodedPDF));
+    };
+
+    var viewResult = function (base64EncodedPDF) {
+        window.open("/Jobvacancy/ViewResults/?Id=" + escape(base64EncodedPDF));
     };
 </script>

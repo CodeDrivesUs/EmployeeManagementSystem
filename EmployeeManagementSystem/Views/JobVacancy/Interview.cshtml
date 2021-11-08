@@ -1,0 +1,65 @@
+﻿@model EmployeeManagementSystem.Business.SharedModels.InterviewModel
+@{
+    ViewBag.Title = "Interview";
+    Layout = "~/Views/Shared/_HrLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-8">
+
+        <div class="panel panel-default container">
+            <div class="panel-heading">
+                <h2 class="text-center"><strong>Proccess Interview</strong></h2>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <form method="Post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-row">
+                            <label>Comments:</label>
+                            <textarea name="comment" rows="5" class="form-control col-md-10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Out Come:</label>
+                            <select name="OutCome" required class="form-control col-md-10">
+                                <option> Select Out Come</option>
+                                <option value="S">Success</option>
+                                <option value="U">Unsuccessful</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>EmploymentType</label>
+                            <select name="contract" required class="form-control col-md-10">
+                                <option> Select Contract</option>
+                               @foreach(var Item in Model.ListContract)
+                               {
+                                   <option value="@Item.Id">@Item.Tittle</option>
+                               }
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><strong class="text-center">Applicant Details</strong></h3>
+            </div>
+            <div class="panel-body">
+                <ul>
+                    <li><strong>First Name :</strong>@Model.JobApplication.FirstName</li>
+                    <li><strong>Last Name :</strong>@Model.JobApplication.LastName</li>
+                    <li><strong>Cell Phone :</strong>@Model.JobApplication.Cellphone</li>
+                    <li><strong>Email :</strong>@Model.JobApplication.Email</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

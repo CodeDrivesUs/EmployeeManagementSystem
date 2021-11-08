@@ -30,6 +30,8 @@ namespace EmployeeManagementSystem.Business.Logic.ProfileLogic
         {
             return ObjectMapper.Mapper.Map<ApplicantProfileModel>(_employeeManagementDbContext.applicantProfiles.Where(x => x.UserId == UserId).FirstOrDefault());
         }
+        
+ 
 
         public void UpdateProfile(ApplicantProfileModel model) {
 
@@ -50,6 +52,11 @@ namespace EmployeeManagementSystem.Business.Logic.ProfileLogic
         public List<ResumeModel> GetResumesByProfileId(int Id)
         {
             return ObjectMapper.Mapper.Map<List<ResumeModel>>(_employeeManagementDbContext.resumes.Where(x => x.ProfileId == Id).ToList());
+        }
+
+        public ResumeModel GetResumebyId( int Id)
+        {
+            return ObjectMapper.Mapper.Map<ResumeModel>(_employeeManagementDbContext.resumes.Find(Id));
         }
 
         public void removeResume( int Id)

@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Contract";
+    Layout = "~/Views/Shared/_HrLayout.cshtml";
+}
+@model EmployeeManagementSystem.Business.SharedModels.ContractModel
+<div class="row">
+    <div class="col-xl-6">
+        <div id="panel-6" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Contract Form
+                </h2>
+                <div class="panel-toolbar">
+                    <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                    <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                    <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                </div>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content p-0">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="panel-content">
+
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="DepartmentName">Tittle</label>
+                                    <input type="text" placeholder="Tittle" class="form-control" required name="Tittle" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-4 mb-3">
+                                    <label class="form-label" for="DepartmentName">Contract</label>
+                                    <input type="file" class="form-control" required name="contract" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-content border-faded border-left-0 border-right-0 border-bottom-0 d-flex flex-row">
+                            <input type="submit" class="btn btn-default ml-auto" value="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div id="panel-4" class="panel">
+            <div class="panel-hdr">
+                <h2>
+                    Contract Records
+                </h2>
+            </div>
+            <div class="panel-container show">
+                <div class="panel-content">
+
+                    <HeaderTemplate>
+                        <table id="dt-basic-example" class="table table-bordered table-hover table-striped w-100">
+                            <thead class="bg-warning-200">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Contract</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        @foreach (var item in Model.AllContracts)
+                        {
+                            <tr>
+
+                                <td>@item.Id</td>
+                                <td><i class="fal fa-file-pdf"></i><span> @item.Tittle</span></td>
+                                <td>@item.Tittle</td>
+                            </tr>
+                        }
+                    </ItemTemplate>
+                    <FooterTemplate>
+                        </tbody>
+                        </table>
+                    </FooterTemplate>
+
+                    <!-- datatable end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

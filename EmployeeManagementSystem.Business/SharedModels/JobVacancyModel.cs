@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeManagementSystem.Business.SharedModels.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,13 @@ namespace EmployeeManagementSystem.Business.SharedModels
         public string Tittle { get; set; }
         public int Type { get; set; }
         public string Description { get; set; }
+        public string TestUrl { get; set; }
         public bool IsAvailable { get; set; }
         public DateTime ExpiryDate { get; set; }
         public int MaximumNumberOfApplications { get; set; }
         public DateTime CreationDate { get; set; }
         public List<DepartmentModel> _allDepartments { get; set; }
         public List<DevisionModel> _devisions { get; set; }
+        public MyProfile Profile { get; set; }
     }
 }

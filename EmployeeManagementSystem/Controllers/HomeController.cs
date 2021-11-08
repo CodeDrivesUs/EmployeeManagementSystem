@@ -40,12 +40,13 @@ namespace EmployeeManagementSystem.Controllers
             {
                 return View("view");
             }
-            if (employee == null)
-            {
-                return RedirectToAction("Index", "Profile");
-            }
+           
             if (Request.IsAuthenticated)
             {
+                if (employee == null)
+                {
+                    return RedirectToAction("Index", "Profile");
+                }
                 return RedirectToAction("Dashboard", "Employee");
             }
             return View(_jobVacancyLogic.Initalize());
